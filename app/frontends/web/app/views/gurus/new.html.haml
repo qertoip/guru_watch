@@ -1,0 +1,21 @@
+- @title = 'New guru'
+
+= form_for( vm.guru, :as => :guru, :url => guru_path( vm.guru ) ) do |f|
+  .row
+    %p
+      = f.label :name, 'Name'
+    %p
+      = f.text_field :name
+  .row
+    %p
+      = f.label :homepage, 'Official site'
+    %p
+      = f.text_field :homepage
+  .row
+    %p
+      = f.label :description, 'Description'
+    %p
+      ~ f.text_area :description
+
+  .buttons
+    = f.submit( 'Create' )

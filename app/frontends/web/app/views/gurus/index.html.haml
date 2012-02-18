@@ -1,0 +1,14 @@
+- @title = 'Known gurus'
+
+.gurus
+  - vm.gurus.each do |guru|
+    .guru
+      .name
+        = guru.name
+      .homepage
+        = guru.homepage
+      .description
+        = guru.description
+
+.options
+  = link_to( "New guru", new_guru_path )
