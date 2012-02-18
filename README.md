@@ -1,6 +1,6 @@
 # guru_watch
 
-Robert Cecil Martin (Uncle Bob) says we are doing it wrong:
+Robert Cecil Martin AKA Uncle Bob says we are doing it wrong:
 
 [Keynote: Architecture the Lost Years] (http://confreaks.com/videos/759-rubymidwest2011-keynote-architecture-the-lost-years)
 
@@ -8,18 +8,24 @@ Robert Cecil Martin (Uncle Bob) says we are doing it wrong:
 
 [Clean Code Episode VII - Architecture, Use Cases, and High Level Design] (http://www.cleancoders.com/codecast/clean-code-episode-7/show) [12$]
 
-This toy application is an __experiment__ on how to do it right. This is a very early stage and work in progress.
+This toy application is an __experiment__ on how to do it right. This is a very early stage of development.
 
 ## According to Uncle Bob
 
  * Architecture is __not__ about frameworks and tools
  * Architecture is about __use cases__
- * Architecutre should not depend on frameworks
+ * Architecture should not depend on frameworks
  * Architecture should not depend on frontend (delivery mechanism)
  * Architecture should not depend on backend (persistence mechanism)
 
 That is, while frameworks, frontend, and backend are obviously necessary,
 architecture should be isolated from them.
+
+## Running application
+
+__Web__ application is the only available frontend right now.
+
+    bundle exec unicorn app/frontends/web/config.ru
 
 ## Running tests
 

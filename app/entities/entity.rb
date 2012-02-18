@@ -29,7 +29,7 @@ module Entities
       end
     end
 
-    def marshal_dump
+    def persistent_attributes
       if attr_persistent_array.nil? || attr_persistent_array.empty?
         raise MissingPersistentAttributes.new( "Add attr_persistent(:list, :of, :attributes) declaration to #{self.class.name}" )
       end
@@ -39,6 +39,10 @@ module Entities
         hash[attr] = send( attr )
       end
       hash
+    end
+
+    def marshal_dump
+      persistent_attributes
     end
 
     def marshal_load( hash )

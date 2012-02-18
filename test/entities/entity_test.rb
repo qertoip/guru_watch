@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-require 'test_helper'
+require 'app_test_helper'
 
 class EntityTest < MiniTest::Spec
 
