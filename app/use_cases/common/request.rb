@@ -3,6 +3,7 @@
 module UseCases
 
   class Request < OpenStruct
+
   end
 
 end

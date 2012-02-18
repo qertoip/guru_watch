@@ -21,6 +21,10 @@ This toy application is an __experiment__ on how to do it right. This is a very 
 That is, while frameworks, frontend, and backend are obviously necessary,
 architecture should be isolated from them.
 
+## Running tests
+
+    bundle exec rake test
+
 ## License
 
 Released under the MIT license. Copyright (C) 2012 Piotr 'Qertoip' Włodarek.
