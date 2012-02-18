@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 module MiniTest::Assertions
   def assert_valid( act, msg = nil )
     valid = act.valid?

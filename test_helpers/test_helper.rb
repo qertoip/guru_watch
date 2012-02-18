@@ -9,7 +9,6 @@ MiniTest::Unit.runner.reporters << MiniTest::Reporters::RubyMineReporter.new
 
 require 'mocha'
 
-require_relative 'minitest/custom_assertions'
-require_relative 'minitest/run_each_test_in_a_rolled_back_transaction'
+require_relative 'minitest_enhancements/all'
 
 require 'factories/all'

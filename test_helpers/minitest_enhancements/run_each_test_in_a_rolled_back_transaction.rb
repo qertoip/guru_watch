@@ -1,9 +1,9 @@
+# -*- coding: UTF-8 -*-
+
+require_relative 'db'
+
 # Monkey patch to ensure each test is run in a rolled back transaction
 class MiniTest::Spec
-
-  def db
-    GuruWatch.instance.config.backend
-  end
 
   # Taken from here:
   # https://github.com/seattlerb/minitest/blob/master/lib/minitest/unit.rb#L925
