@@ -25,9 +25,14 @@ class GurusControllerTest < ActionDispatch::IntegrationTest #ActionDispatch::Tes
   end
 
   test 'edit' do
-    #guru = Entities::Guru.create_valid!
-    #get "/gurus/#{guru.id}/edit"
-    #assert_response( 200 )
+    guru = Entities::Guru.create_valid!
+    get "/gurus/#{guru.id}/edit"
+    assert_response( 200 )
+  end
+
+  test 'edit with invalid id' do
+    get '/gurus/423932442/edit'
+    assert_response( 404 )
   end
 
 end

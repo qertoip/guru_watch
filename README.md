@@ -1,6 +1,6 @@
 # guru_watch
 
-Robert Cecil Martin AKA Uncle Bob says we are doing it wrong:
+Robert Cecil Martin AKA Uncle Bob says Ruby on Rails programmers are doing the architecture wrong:
 
 [Keynote: Architecture the Lost Years] (http://confreaks.com/videos/759-rubymidwest2011-keynote-architecture-the-lost-years)
 

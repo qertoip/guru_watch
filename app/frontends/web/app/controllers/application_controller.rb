@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   include UseCases
 
+  rescue_from Backends::ObjectNotFound, :with => :show_404
+
   ## This abstract factory returns a use case implementation depending
   ## on the ...
   #def use_case( name )
@@ -20,6 +22,10 @@ class ApplicationController < ActionController::Base
 
     def use_case_implementations
       @use_case_implementations ||= {}
+    end
+
+    def show_404
+      render( :file => File.join( Rails.root, 'public', '404.html' ), :status => 404 )
     end
 
 end

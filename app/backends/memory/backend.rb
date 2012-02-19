@@ -57,7 +57,7 @@ module Backends
       end
 
       def find( query, id )
-        query.where( :id => id ).first
+        query.where( :id => id ).first  ||  raise( ObjectNotFound.new( "#{query.options.from}/#{id} not found" ) )
       end
 
       def transaction

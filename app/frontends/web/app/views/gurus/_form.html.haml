@@ -1,0 +1,15 @@
+.row
+  %p
+    = f.label :name, 'Name'
+  %p
+    = f.text_field :name
+.row
+  %p
+    = f.label :homepage, 'Official site'
+  %p
+    = f.text_field :homepage
+.row
+  %p
+    = f.label :description, 'Description'
+  %p
+    ~ f.text_area :description

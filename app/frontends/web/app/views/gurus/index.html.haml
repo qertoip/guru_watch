@@ -9,6 +9,8 @@
         = guru.homepage
       .description
         = guru.description
+      .options
+        = link_to( "edit", edit_guru_path( guru ) )
 
 .options
   = link_to( "New guru", new_guru_path )

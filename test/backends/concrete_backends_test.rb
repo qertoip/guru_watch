@@ -182,6 +182,13 @@ class ConcreteBackendsTest < MiniTest::Spec
         assert_equal( the_right_dog.id, found_dog.id )
       end
 
+      it "raises ObjectNotFound exception" do
+        assert_raises( Backends::ObjectNotFound ) do
+          @db.save( Dog.new )
+          @db.from( :dogs ).find( 764575723 )
+        end
+      end
+
     end
 
     describe ".transaction" do
