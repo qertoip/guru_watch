@@ -1,6 +1,6 @@
 # guru_watch
 
-Robert Cecil Martin AKA Uncle Bob says Ruby on Rails programmers are doing the architecture wrong:
+Robert C. Martin (Uncle Bob) says Ruby on Rails programmers are doing the architecture wrong:
 
 [Keynote: Architecture the Lost Years] (http://confreaks.com/videos/759-rubymidwest2011-keynote-architecture-the-lost-years)
 
@@ -8,15 +8,15 @@ Robert Cecil Martin AKA Uncle Bob says Ruby on Rails programmers are doing the a
 
 [Clean Code Episode VII - Architecture, Use Cases, and High Level Design] (http://www.cleancoders.com/codecast/clean-code-episode-7/show) [12$]
 
-This toy application is an __experiment__ on how to do it inline with Ivar Jacobson and Robert C. Martin recommendations.
+This toy application is an __experiment__ on how to do it inline with Ivar Jacobsons and Robert C. Martins recommendations.
 
 ## According to Uncle Bob
 
  * Architecture is __not__ about frameworks and tools
  * Architecture is about __use cases__
  * Architecture should not depend on frameworks
- * Architecture should not depend on frontend (delivery mechanism)
- * Architecture should not depend on backend (persistence mechanism)
+ * Architecture should not depend on a frontend (delivery mechanism)
+ * Architecture should not depend on a backend (persistence mechanism)
 
 That is, while frameworks, frontend, and backend are obviously necessary,
 architecture should be isolated from them.
