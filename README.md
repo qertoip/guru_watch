@@ -8,7 +8,7 @@ Robert Cecil Martin AKA Uncle Bob says Ruby on Rails programmers are doing the a
 
 [Clean Code Episode VII - Architecture, Use Cases, and High Level Design] (http://www.cleancoders.com/codecast/clean-code-episode-7/show) [12$]
 
-This toy application is an __experiment__ on how to do it right. This is a very early stage of development.
+This toy application is an __experiment__ on how to do it inline with Ivar Jacobson and Robert C. Martin recommendations.
 
 ## According to Uncle Bob
 
@@ -21,7 +21,7 @@ This toy application is an __experiment__ on how to do it right. This is a very 
 That is, while frameworks, frontend, and backend are obviously necessary,
 architecture should be isolated from them.
 
-## Running application
+## Running the application
 
 __Web__ application is the only available frontend right now.
 
@@ -30,6 +30,30 @@ __Web__ application is the only available frontend right now.
 ## Running tests
 
     bundle exec rake test
+
+## Choosen architectural issues in the current implementation
+
+ * Entities are not completely "persistence free".
+   For example they know which of their attributes are persistent.
+   This "schema" information should be moved to the entity gateways.
+ * Entities are not completely "web" free.
+   For example they include ActiveModel::Conversions module which adds #to_param method.
+   Instead, this module should probably be included on the fly by a Presenter
+   into the singleton class of the data structure which represents the said
+   Entity in a ResponseModel.
+ * Entities leak into the controller and views.
+   ResponseModel references them, pretending they are data structures.
+ * Controllers depend on concrete use cases instead of use case interfaces.
+   This prevents controllers from being tested in isolation from the application.
+   Instead of hard coding concrete use case classes controllers should probably
+   use an abstract factory.
+
+## Choosen todos
+
+ * Implement auto-type-casting for entity attributes so they can be initialized
+   with a hash of strings. So it feels like an ActiveRecord model.
+ * Implement strong typing for the memory backend.
+ * Implement active record backend.
 
 ## License
 
