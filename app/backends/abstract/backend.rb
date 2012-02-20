@@ -7,12 +7,15 @@ module Backends
     class Backend
 
       def object( entity_class )
-        Query.new( gateway( entity_class ) )
+        Query.new( deduce_gateway_from( entity_class ) )
       end
+
+      alias_method :objects, :object
+      alias_method :[], :object
 
       private
 
-        def gateway( entity_class )
+        def deduce_gateway_from( entity_class )
           gateway_class_name = "#{entity_class.name.demodulize}Gateway"
 
           current_module = self.class.name.deconstantize.constantize       # Backends::Memory

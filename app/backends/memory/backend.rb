@@ -28,15 +28,18 @@ module Backends
       end
 
       def save( entity )
-        gateway( entity.class ).save( entity )
+        gateway = deduce_gateway_from( entity.class )
+        gateway.save( entity )
       end
 
       def save!( entity )
-        gateway( entity.class ).save!( entity )
+        gateway = deduce_gateway_from( entity.class )
+        gateway.save!( entity )
       end
 
       def save_without_validation( entity )
-        gateway( entity.class ).save!( entity )
+        gateway = deduce_gateway_from( entity.class )
+        gateway.save_without_validation( entity )
       end
 
       def deep_copy( object )

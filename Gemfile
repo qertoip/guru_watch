@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'activemodel', :require => 'active_model'
-gem 'activesupport', :require => 'active_support'
+gem 'activesupport', :require => 'active_support/all'
 
 group :default_web do
   gem 'unicorn'

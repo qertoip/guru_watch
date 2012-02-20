@@ -16,7 +16,6 @@ module Backends
     def initialize( gateway )
       self.gateway = gateway
       self.options = QueryOptions.new
-      options.entities_name = gateway.class.name.demodulize.tableize.gsub( '_gateway', '' ).to_sym
     end
 
   end

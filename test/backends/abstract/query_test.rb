@@ -53,19 +53,19 @@ class QueryTest < MiniTest::Spec
   end
 
   describe ".first" do
-    it "calls backend.first passing it self" do
+    it "calls gateway.first passing it self" do
       @query.first
     end
   end
 
   describe ".all" do
-    it "calls backend.all passing it self" do
+    it "calls gateway.all passing it self" do
       @query.all
     end
   end
 
   describe ".find" do
-    it "calls backend.find passing it self and id" do
+    it "calls gateway.find passing it self and id" do
       @query.find( 1 )
     end
   end

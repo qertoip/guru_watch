@@ -3,7 +3,7 @@
 module Backends
 
   class QueryOptions
-    attr_accessor :entities_name, :where, :where_not, :order
+    attr_accessor :where, :where_not, :order
   end
 
 end

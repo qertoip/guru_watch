@@ -25,11 +25,11 @@ class GuruWatch
 end
 
 # Application requires
-require_relative 'backends/all'
+require_relative 'backends/abstract/all'
 require_relative 'entities/all'
 require_relative 'use_cases/all'
 
 # Configuration
 
-require_relative 'backends/memory/backend'
+require_relative 'backends/memory/all'
 GuruWatch.instance.config.backend = Backends::Memory::Backend.new

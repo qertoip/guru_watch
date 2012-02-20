@@ -33,9 +33,6 @@ __Web__ application is the only available frontend right now.
 
 ## Choosen architectural issues in the current implementation
 
- * Entities are not completely "persistence free".
-   For example they know which of their attributes are persistent.
-   This "schema" information should be moved to the entity gateways.
  * Entities are not completely "web" free.
    For example they include ActiveModel::Conversions module which adds #to_param method.
    Instead, this module should probably be included on the fly by a Presenter

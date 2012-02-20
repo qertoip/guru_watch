@@ -10,6 +10,10 @@ class EntityTest < MiniTest::Spec
 
     class Dog < Entity
       attr_accessor   :id, :name, :age
+    end
+
+    class DogGateway < Backends::Memory::Gateway
+      entity_class    :Dog
       attr_persistent :id, :name, :age
     end
 
@@ -38,23 +42,5 @@ class EntityTest < MiniTest::Spec
   #    assert( Dog.new.db.is_a?( Backends::AbstractBackend ) )
   #  end
   #end
-
-  describe ".marshal_dump" do
-    it "returns a Hash with persistent attributes' values" do
-      data = { :age => 1, :id => 10, :name => 'Puppy' }
-      dog = Dog.new( data )
-      assert_equal( data, dog.marshal_dump )
-    end
-  end
-
-  describe ".marshal_load" do
-    it "sets the attributes passed in a Hash" do
-      dog = Dog.new
-      dog.marshal_load( :age => 1, :id => 10, :name => 'Puppy' )
-      assert_equal( 10, dog.id )
-      assert_equal( 1, dog.age )
-      assert_equal( 'Puppy', dog.name )
-    end
-  end
 
 end

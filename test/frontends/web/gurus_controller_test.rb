@@ -15,7 +15,7 @@ class GurusControllerTest < ActionDispatch::IntegrationTest #ActionDispatch::Tes
   end
 
   test 'create' do
-    post '/gurus', { :guru => Entities::Guru.new_valid.persistent_attributes }
+    post '/gurus', { :guru => Entities::Guru.valid_attributes }
     assert_response( 302 )
   end
 

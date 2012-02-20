@@ -13,7 +13,7 @@ module Backends
     end
 
     def find( id )
-      gateway.find( self, id )
+      gateway.find( id, self )
     end
 
   end
