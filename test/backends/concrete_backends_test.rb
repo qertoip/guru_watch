@@ -20,10 +20,16 @@ class ConcreteBackendsTest < MiniTest::Spec
     attr_persistent :id, :name
   end
 
-  [Backends::Memory::Backend].each do |backend_class|
+  [Backends::Memory].each do |backend_module|
+
+    class CatGateway < backend_module::Gateway
+    end
+
+    class DogGateway < backend_module::Gateway
+    end
 
     before do
-      @db = backend_class.new
+      @db = backend_module::Backend.new
     end
 
     describe ".save_without_validation" do
@@ -51,7 +57,7 @@ class ConcreteBackendsTest < MiniTest::Spec
       it "stores the object for the future retrieval" do
         dog = Dog.new
         @db.save_without_validation( dog )
-        found_dog = @db.from( :dogs ).find( dog.id )
+        found_dog = @db.object( Dog ).find( dog.id )
         assert_equal( dog.id, found_dog.id )
       end
 
@@ -60,7 +66,7 @@ class ConcreteBackendsTest < MiniTest::Spec
         @db.save!( mem_dog )
         mem_dog.name = 'Puppy'
 
-        db_dog = @db.from( :dogs ).first
+        db_dog = @db.object( Dog ).first
         assert_equal( 'Vaider', db_dog.name )
       end
 
@@ -100,12 +106,12 @@ class ConcreteBackendsTest < MiniTest::Spec
 
       it "returns first object" do
         2.times{ @db.save( Dog.new ); @db.save( Cat.new ) }
-        dog = @db.from( :dogs ).first
+        dog = @db.object( Dog ).first
         assert_equal( Dog, dog.class )
       end
 
       it "returns nil if there are no objects" do
-        dog = @db.from( :dogs ).first
+        dog = @db.object( Dog ).first
         assert_nil( dog )
       end
 
@@ -115,7 +121,7 @@ class ConcreteBackendsTest < MiniTest::Spec
 
       it "returns list of objects of the type specified with from option" do
         2.times{ @db.save( Dog.new ); @db.save( Cat.new ) }
-        cats = @db.from( :cats ).all
+        cats = @db.objects( Cat ).all
         assert_equal( 2, cats.size )
         cats.each do |cat|
           assert_equal( Cat, cat.class )
@@ -123,7 +129,7 @@ class ConcreteBackendsTest < MiniTest::Spec
       end
 
       it "returns [] if there are no objects" do
-        dogs = @db.from( :dogs ).all
+        dogs = @db.objects( Dog ).all
         assert_equal( [], dogs )
       end
 
@@ -136,7 +142,7 @@ class ConcreteBackendsTest < MiniTest::Spec
         @db.save( Dog.new( :name => 'Monster', :age => 6 ) )
         @db.save( Dog.new( :name => 'Lenny', :age => 10 ) )
         @db.save( Dog.new( :name => 'Nelson', :age => 6) )
-        dogs = @db.from( :dogs ).where( :age => 6 ).all
+        dogs = @db.objects( Dog ).where( :age => 6 ).all
         assert_equal( 2, dogs.size )
         dogs.each do |dog|
           assert_equal( 6, dog.age )
@@ -153,7 +159,7 @@ class ConcreteBackendsTest < MiniTest::Spec
         @db.save( Dog.new( :name => 'Lenny', :age => 10 ) )
         @db.save( Dog.new( :name => 'Nelson', :age => 6) )
         @db.save( Dog.new( :name => 'Lenny', :age => 12 ) )
-        dogs = @db.from( :dogs ).where_not( :age => 6 ).all
+        dogs = @db.objects( Dog ).where_not( :age => 6 ).all
         assert_equal( 3, dogs.size )
         dogs.each do |dog|
           assert( [3, 10, 12].include?( dog.age ) )
@@ -177,7 +183,7 @@ class ConcreteBackendsTest < MiniTest::Spec
         2.times{ @db.save( Dog.new ) }
         2.times{ @db.save( Cat.new ) }
 
-        found_dog = @db.from( :dogs ).find( the_right_dog.id )
+        found_dog = @db.object( Dog ).find( the_right_dog.id )
         assert_equal( Dog, found_dog.class )
         assert_equal( the_right_dog.id, found_dog.id )
       end
@@ -185,7 +191,7 @@ class ConcreteBackendsTest < MiniTest::Spec
       it "raises ObjectNotFound exception" do
         assert_raises( Backends::ObjectNotFound ) do
           @db.save( Dog.new )
-          @db.from( :dogs ).find( 764575723 )
+          @db.object( Dog ).find( 764575723 )
         end
       end
 
@@ -222,13 +228,13 @@ class ConcreteBackendsTest < MiniTest::Spec
     begin
       @db.transaction do
         @db.save!(Cat.new(:name => cat_name))
-        assert(@db.from(:cats).where(:name => cat_name).first)
+        assert( @db.object( Cat ).where( :name => cat_name ).first )
         block_executed = true
         raise exception_class
       end
     rescue exception_class => e
-      assert(block_executed, "Block didn't executed: #{e.message}")
-      assert_nil(@db.from(:cats).where(:name => cat_name).first)
+      assert( block_executed, "Block didn't executed: #{e.message}" )
+      assert_nil( @db.object( Cat ).where( :name => cat_name ).first )
     end
   end
 

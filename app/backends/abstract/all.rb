@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 require_relative 'exceptions'
-require_relative 'abstract_backend'
-require_relative 'query'
+require_relative 'backend'
+require_relative 'gateway'
+require_relative 'query/query'
 require_relative 'validations/uniqueness'
