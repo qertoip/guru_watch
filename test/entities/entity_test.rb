@@ -6,41 +6,52 @@ class EntityTest < MiniTest::Spec
 
   include ::Entities
 
-  describe ".initialize" do
+  describe '.initialize' do
 
-    class Dog < Entity
-      attr_accessor   :id, :name, :age
+    class Dog < Entities::Entity
+      attribute :id, :type => Integer
+      attribute :name, :type => String
+      attribute :age, :type => Integer
+      attribute :price, :type => BigDecimal
+      attribute :bought_at, :type => DateTime
+      attribute :active, :type => Boolean
     end
 
-    class DogGateway < Backends::Memory::Gateway
-      entity_class    :Dog
-      attr_persistent :id, :name, :age
-    end
+    describe ".new" do
 
-    it "initializes without arguments" do
-      Dog.new
-    end
+      it 'initializes without arguments' do
+        Dog.new
+      end
 
-    it "initializes with nil argument (this convenient in UseCases if frontend didn't pass a request at all)" do
-      Dog.new( nil )
-    end
+      it 'initializes with nil argument (this convenient in UseCases if frontend didn\'t pass a request at all)' do
+        Dog.new( nil )
+      end
 
-    it "initializes with a hash" do
-      dog = Dog.new( :name => 'Daisy', :age => 14 )
-      assert_equal( dog.age, 14 )
-      assert_equal( dog.name, 'Daisy' )
-    end
+      it 'initializes with a hash' do
+        dog = Dog.new( :name => 'Daisy', :age => 14 )
+        assert_equal( dog.age, 14 )
+        assert_equal( dog.name, 'Daisy' )
+      end
 
-    it "initializes with a hash and options" do
-      Dog.new( { :name => 'Daisy', :age => 14 }, { :without_protection => true } )
-    end
+      it 'initializes with a hash and options' do
+        Dog.new( { :name => 'Daisy', :age => 14 }, { :without_protection => true } )
+      end
 
+      it 'auto-converts strings to strongly typed values' do
+        dog = Dog.new(
+            :name => 'Buldog',
+            :age => '18',
+            :price => '197.98',
+            :bought_at => '2000-03-04 17:35',
+            :active => '1' )
+        assert_equal( 'Buldog', dog.name )
+        assert_equal( 18, dog.age )
+        assert_equal( BigDecimal.new( '197.98' ), dog.price )
+        assert_equal( DateTime.parse( '2000-03-04 17:35' ), dog.bought_at )
+        assert_equal( true, dog.active? )  # must be a TrueClass, i.e. not '1'
+      end
+
+    end
   end
-
-  #describe ".db" do
-  #  it "returns the backend" do
-  #    assert( Dog.new.db.is_a?( Backends::AbstractBackend ) )
-  #  end
-  #end
 
 end

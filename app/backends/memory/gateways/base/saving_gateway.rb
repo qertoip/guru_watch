@@ -15,7 +15,7 @@ module Backends
 
         if entity.id.nil?
           id = new_id( hashes )
-          hash[:id] = id
+          hash['id'] = id
           entity.id = id
         end
 
@@ -47,7 +47,7 @@ module Backends
         def new_id( existing_hashes )
           begin
             rand_id = rand( 2**31 )
-          end while existing_hashes.map{ |h| h[:id] }.include?( rand_id )
+          end while existing_hashes.map{ |h| h['id'] }.include?( rand_id )
 
           return rand_id
         end

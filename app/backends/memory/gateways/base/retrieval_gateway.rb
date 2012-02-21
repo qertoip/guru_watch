@@ -22,7 +22,7 @@ module Backends
 
       def find( id, query = nil )
         query ||= Query.new( self )
-        query.where( :id => id ).first  ||  raise( ObjectNotFound.new( "#{self.class.entity_klass.name}/#{id} not found" ) )
+        query.where( :id => id.to_i ).first  ||  raise( ObjectNotFound.new( "#{self.class.entity_klass.name}/#{id} not found" ) )
       end
 
       private
@@ -30,12 +30,14 @@ module Backends
         def all_where( query, hashes )
           conditions = query.options.where
           return hashes unless conditions
+          conditions.stringify_keys!
           hashes.select { |hash| hash_meets_conditions?( hash, conditions ) }
         end
 
         def all_where_not( query, hashes )
           conditions = query.options.where_not
           return hashes unless conditions
+          conditions.stringify_keys!
           hashes.select { |hash| !hash_meets_conditions?( hash, conditions ) }
         end
 

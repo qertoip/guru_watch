@@ -47,10 +47,9 @@ __Web__ application is the only available frontend right now.
 
 ## Choosen todos
 
- * Implement auto-type-casting for entity attributes so they can be initialized
-   with a hash of strings. So it feels like an ActiveRecord model.
- * Implement strong typing for the memory backend.
  * Implement active record backend.
+ * Make test.log work.
+ * Make test env work.
 
 ## License
 

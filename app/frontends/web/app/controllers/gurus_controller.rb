@@ -16,7 +16,7 @@ class GurusController < ApplicationController
   end
 
   def edit
-    @rm = EditGuru.new( :id => params[:id].to_i ).exec
+    @rm = EditGuru.new( :id => params[:id] ).exec
   end
 
 end

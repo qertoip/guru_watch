@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'activemodel', :require => 'active_model'
 gem 'activesupport', :require => 'active_support/all'
+gem 'active_attr', :git => 'https://github.com/cgriego/active_attr.git'
 
 group :default_web do
   gem 'unicorn'

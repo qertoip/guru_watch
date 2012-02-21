@@ -5,14 +5,15 @@ require 'app_test_helper'
 class ConcreteBackendsTest < MiniTest::Spec
 
   class Dog < Entities::Entity
-    attr_accessor   :id, :name, :age
+    attribute :id, :type => Integer
+    attribute :name, :type => String
+    attribute :age, :type => Integer
   end
 
   [Backends::Memory].each do |backend_module|
 
     class DogGateway < backend_module::Gateway
-      entity_class    Dog
-      attr_persistent :id, :name, :age
+      entity_class Dog
     end
 
     before do
@@ -78,7 +79,7 @@ class ConcreteBackendsTest < MiniTest::Spec
 
     begin
       @db.transaction do
-        @db.save!( Dog.new(:name => dog_name) )
+        @db.save!( Dog.new( :name => dog_name ) )
         assert( @db.object( Dog ).where( :name => dog_name ).first )
         block_executed = true
         raise exception_class

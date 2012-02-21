@@ -7,7 +7,6 @@ module Backends
     class GuruGateway < Gateway
 
       entity_class Entities::Guru
-      attr_persistent :id, :name, :homepage, :description
 
     end
 

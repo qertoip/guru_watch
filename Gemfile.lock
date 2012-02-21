@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/cgriego/active_attr.git
+  revision: 4988397fe7d1e156da6100b0b3580e38c00b6c81
+  specs:
+    active_attr (0.5.0.alpha2)
+      activemodel (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -99,6 +107,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_attr!
   activemodel
   activesupport
   haml

@@ -3,17 +3,10 @@
 module Entities
 
   class Entity
-    include ActiveModel::Validations
-    include ActiveModel::Conversion   # adds #to_key and #to_param
-    include Backends::Validations
-    include Backends::EntityState     # adds #persisted?
+    include ActiveAttr::Model         # Make PORO objects feel like ActiveRecord models
 
-    def initialize( atts = {}, options = {} )
-      (atts || {}).each do |attr, value|
-        self.send( "#{attr}=", value )
-      end
-    end
-
+    include Backends::Validations     # UniquenessValidator
+    include Backends::EntityState     # Adds #persisted?
   end
 
 end
