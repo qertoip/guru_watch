@@ -12,10 +12,6 @@ module Backends
       include SavingGateway
       include RetrievalGateway
 
-      class << self
-        attr_accessor :persistent_attributes
-      end
-
       private
 
         def root

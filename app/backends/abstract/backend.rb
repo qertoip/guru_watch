@@ -7,7 +7,7 @@ module Backends
     class Backend
 
       def object( entity_class )
-        Query.new( deduce_gateway_from( entity_class ) )
+        ::Backends::Query.new( deduce_gateway_from( entity_class ) )
       end
 
       alias_method :objects, :object

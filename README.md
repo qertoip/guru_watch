@@ -47,6 +47,7 @@ __Web__ application is the only available frontend right now.
 
 ## Choosen todos
 
+ * Namespace the tests like the code.
  * Implement active record backend.
  * Make test.log work.
  * Make test env work.

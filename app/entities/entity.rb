@@ -6,7 +6,19 @@ module Entities
     include ActiveAttr::Model         # Make PORO objects feel like ActiveRecord models
 
     include Backends::Validations     # UniquenessValidator
-    include Backends::EntityState     # Adds #persisted?
+
+    def persisted?
+      !(new_record? || destroyed?)
+    end
+
+    def new_record?
+      id.nil?  # TODO: this assumes only db manages ids
+    end
+
+    def destroyed?
+      @destroyed
+    end
+
   end
 
 end

@@ -25,6 +25,7 @@ class GuruWatch
 end
 
 # Application requires
+require_relative 'backends/common/all'
 require_relative 'backends/abstract/all'
 require_relative 'entities/all'
 require_relative 'use_cases/all'

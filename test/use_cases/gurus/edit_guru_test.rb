@@ -2,16 +2,17 @@
 
 require 'app_test_helper'
 
-class EditGuruTest < MiniTest::Spec
+module UseCases
 
-  include ::UseCases
-  include ::Entities
+  class EditGuruTest < MiniTest::Spec
 
-  it "returns a guru for edition" do
-    guru = Guru.create_valid!
-    response = EditGuru.new( :id => guru.id ).exec
-    assert( response.ok? )
-    assert_equal( guru.id, response.guru.id )
+    it "returns a guru for edition" do
+      guru = Entities::Guru.create_valid!
+      response = EditGuru.new( :id => guru.id ).exec
+      assert( response.ok? )
+      assert_equal( guru.id, response.guru.id )
+    end
+
   end
 
 end

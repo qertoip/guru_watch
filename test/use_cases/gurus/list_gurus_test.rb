@@ -2,17 +2,20 @@
 
 require 'app_test_helper'
 
-class ListGurusTest < MiniTest::Spec
+module UseCases
 
-  include ::UseCases
-  include ::Entities
+  class ListGurusTest < MiniTest::Spec
 
-  it "returns a list of all gurus" do
-    Guru.create_valid!
-    Guru.create_valid!
-    response = ListGurus.new.exec
-    assert( response.ok? )
-    assert_equal( 2, response.gurus.size )
+    include ::Entities
+
+    it "returns a list of all gurus" do
+      Guru.create_valid!
+      Guru.create_valid!
+      response = ListGurus.new.exec
+      assert( response.ok? )
+      assert_equal( 2, response.gurus.size )
+    end
+
   end
 
 end
