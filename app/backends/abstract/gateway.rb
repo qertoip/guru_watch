@@ -8,12 +8,12 @@ module Backends
 
       attr_accessor :backend
 
-      class << self
-        attr_accessor :entity_klass
-      end
-
       def initialize( backend )
         self.backend = backend
+      end
+
+      class << self
+        attr_accessor :entity_klass
       end
 
       # Declare a class of the entity this gateway is managing, like

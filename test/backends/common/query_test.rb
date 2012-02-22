@@ -14,6 +14,7 @@ module Backends
       def first( query ) end
       def all( query ) end
       def find( query, id ) end
+      def create!( attributes = {} ) end
     end
 
     class Cat < Entity
@@ -68,6 +69,12 @@ module Backends
     describe ".find" do
       it "calls gateway.find passing it self and id" do
         @query.find( 1 )
+      end
+    end
+
+    describe ".create!" do
+      it "calls gateway.create! by passing it self" do
+        @query.create!
       end
     end
 

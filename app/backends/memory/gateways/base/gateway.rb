@@ -1,7 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-require_relative 'saving_gateway'
-require_relative 'retrieval_gateway'
+require_relative 'modules/create_gateway'
+require_relative 'modules/save_gateway'
+require_relative 'modules/retrieve_gateway'
 
 module Backends
 
@@ -9,10 +10,15 @@ module Backends
 
     class Gateway < Abstract::Gateway
 
-      include SavingGateway
-      include RetrievalGateway
+      include CreateGateway
+      include SaveGateway
+      include RetrieveGateway
 
-      private
+      protected
+
+        def entity_class
+          self.class.entity_klass
+        end
 
         def root
           backend.root

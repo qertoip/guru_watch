@@ -4,12 +4,11 @@ module Backends
 
   module Memory
 
-    module RetrievalGateway
+    module RetrieveGateway
 
       def all( query = nil )
         query ||= Query.new( self )
-        entity_class_name = self.class.entity_klass.name
-        hashes = root[entity_class_name] || []
+        hashes = root[entity_class.name] || []
         hashes = all_where( query, hashes )
         hashes = all_where_not( query, hashes )
         hashes_to_entities( hashes )
@@ -22,7 +21,7 @@ module Backends
 
       def find( id, query = nil )
         query ||= Query.new( self )
-        query.where( :id => id.to_i ).first  ||  raise( ObjectNotFound.new( "#{self.class.entity_klass.name}/#{id} not found" ) )
+        query.where( :id => id.to_i ).first  ||  raise( ObjectNotFound.new( "#{entity_class.name}/#{id} not found" ) )
       end
 
       private

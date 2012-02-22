@@ -1,115 +1,39 @@
 # -*- coding: UTF-8 -*-
 
-require 'app_test_helper'
-
 module Backends
 
   module Concrete
 
-    class GatewayTest < MiniTest::Spec
+    class RetrieveGatewayTest < MiniTest::Spec
 
-      class Dog < Entities::Entity
-        attribute :id, :type => Integer
-        attribute :name, :type => String
-        attribute :age, :type => Integer
-        attribute :price, :type => BigDecimal
-        attribute :bought_at, :type => DateTime
-        attribute :active, :type => Boolean
-      end
+      describe_each_backend do |backend_module|
 
-      class Cat < Entities::Entity
-        attribute :id, :type => Integer
-        attribute :name, :type => String
-      end
+        class Dog < Entities::Entity
+          attribute :id, :type => Integer
+          attribute :name, :type => String
+          attribute :age, :type => Integer
+          attribute :price, :type => BigDecimal
+          attribute :bought_at, :type => DateTime
+          attribute :active, :type => Boolean
+        end
 
-      [Memory].each do |backend_module|
+        class Cat < Entities::Entity
+          attribute :id, :type => Integer
+          attribute :name, :type => String
+        end
 
-        class DogGateway < backend_module::Gateway
-          entity_class    Dog
+        class DogGateway < backend_module::Gateway;
+          entity_class Dog
         end
 
         class CatGateway < backend_module::Gateway
-          entity_class    Cat
+          entity_class Cat
         end
 
         before do
           backend = backend_module::Backend.new
           @dog_gateway = DogGateway.new( backend )
           @cat_gateway = CatGateway.new( backend )
-        end
-
-        describe '.save_without_validation' do
-
-          it 'assigns a unique id to a new object' do
-            dog = Dog.new
-            @dog_gateway.save_without_validation( dog )
-            assert( dog.id )
-
-            dog2 = Dog.new
-            @dog_gateway.save_without_validation( dog2 )
-            assert( dog2.id )
-            refute_equal( dog.id, dog2.id )
-          end
-
-          it 'does not change the id of an existing object' do
-            dog = Dog.new
-            @dog_gateway.save_without_validation( dog )
-            original_id = dog.id
-
-            @dog_gateway.save_without_validation( dog )  # again
-            assert_equal( original_id, dog.id )
-          end
-
-          it 'stores the object for the future retrieval' do
-            dog = Dog.new
-            @dog_gateway.save_without_validation( dog )
-            found_dog = @dog_gateway.find( dog.id )
-            assert_equal( dog.id, found_dog.id )
-          end
-
-          it 'stores *copy* of the object (not just a reference)' do
-            mem_dog = Dog.new( :name => 'Vader' )
-            @dog_gateway.save!( mem_dog )
-            mem_dog.name = 'Puppy'
-
-            db_dog = @dog_gateway.first
-            assert_equal( 'Vader', db_dog.name )
-          end
-
-        end
-
-        describe '.save' do
-
-          it 'returns true if object was saved' do
-            dog = Dog.new
-            dog.expects( :valid? => true )
-            assert( @dog_gateway.save( dog ) )
-          end
-
-          it 'returns false if object was invalid' do
-            dog = Dog.new
-            dog.expects( :valid? => false )
-            refute( @dog_gateway.save( dog ) )
-          end
-
-        end
-
-        describe '.save!' do
-
-          it 'returns true if object was saved' do
-            dog = Dog.new
-            dog.expects( :valid? => true )
-            assert( @dog_gateway.save!( dog ) )
-          end
-
-          it 'throws ObjectIvalid if object was invalid' do
-            dog = Dog.new
-            dog.expects( :valid? => false )
-            assert_raises( Backends::ObjectInvalid ) do
-              @dog_gateway.save!( dog )
-            end
-          end
-
         end
 
         describe '.first' do

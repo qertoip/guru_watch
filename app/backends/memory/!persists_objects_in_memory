@@ -1,0 +1,4 @@
+
+Memory::Backend "persists" objects in memory for the sake of fast tests.
+
+This is api-adapter AND memory-store in one.

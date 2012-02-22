@@ -4,13 +4,12 @@ module Backends
 
   module Memory
 
-    module SavingGateway
+    module SaveGateway
 
       def save_without_validation( entity )
         class_name = entity.class.name
 
         hash = entity_to_hash( entity )
-
         hashes = ( root[class_name] ||= [] )
 
         if entity.id.nil?
@@ -36,7 +35,7 @@ module Backends
       def save!( entity )
         if entity.valid?
           save_without_validation( entity )
-          return true
+          true
         else
           raise ObjectInvalid.new( entity.errors.inspect )
         end
@@ -49,7 +48,7 @@ module Backends
             rand_id = rand( 2**31 )
           end while existing_hashes.map{ |h| h['id'] }.include?( rand_id )
 
-          return rand_id
+          rand_id
         end
 
     end

@@ -16,6 +16,10 @@ module Backends
       gateway.find( id, self )
     end
 
+    def create!( attributes = {} )
+      gateway.create!( attributes )
+    end
+
   end
 
 end

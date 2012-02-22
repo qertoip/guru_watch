@@ -4,8 +4,6 @@ module Entities
 
   class Guru < Entity
 
-    # attr_accessor   :id, :name, :homepage, :description
-
     attribute :id,   :type => Integer
     attribute :name, :type => String
     attribute :homepage, :type => String
