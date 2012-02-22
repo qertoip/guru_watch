@@ -3,7 +3,7 @@
 This application aims to be example of __Entity-Control-Boundary__ architecture
 also known as __Use Case Driven__ approach,
 as explained by Robert C. Martin (Uncle Bob) in his famous keynote
-[Architecture the Lost Years] (http://confreaks.com/videos/759-rubymidwest2011-keynote-architecture-the-lost-years)
+[Architecture: the Lost Years] (http://confreaks.com/videos/759-rubymidwest2011-keynote-architecture-the-lost-years).
 
 ## The story
 
