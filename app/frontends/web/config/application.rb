@@ -57,3 +57,5 @@ module Web
     config.assets.version = '1.0'
   end
 end
+
+UseCases::SeedDatabase.new.exec

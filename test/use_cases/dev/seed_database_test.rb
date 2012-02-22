@@ -4,10 +4,10 @@ require 'app_test_helper'
 
 module UseCases
 
-  class SeedTest < MiniTest::Spec
+  class SeedDatabaseTest < MiniTest::Spec
 
     it "creates example gurus" do
-      response = Seed.new.exec
+      response = SeedDatabase.new.exec
       assert( response.ok? )
 
       #assert_equal( atts[:name], guru.name )

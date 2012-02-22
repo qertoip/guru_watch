@@ -1,22 +1,17 @@
 # guru_watch
 
-Robert C. Martin (Uncle Bob) says Ruby on Rails programmers are doing the architecture wrong:
+This application aims to be example of __Entity-Control-Boundary__ architecture
+also known as __Use Case Driven__ approach,
+as explained by Robert C. Martin (Uncle Bob) in his famous keynote
+[Architecture the Lost Years] (http://confreaks.com/videos/759-rubymidwest2011-keynote-architecture-the-lost-years)
 
-[Keynote: Architecture the Lost Years] (http://confreaks.com/videos/759-rubymidwest2011-keynote-architecture-the-lost-years)
+## The story
 
-[Screeming Architecture] (http://blog.8thlight.com/uncle-bob/2011/09/30/Screaming-Architecture.html)
-
-[Clean Code Episode VII - Architecture, Use Cases, and High Level Design] (http://www.cleancoders.com/codecast/clean-code-episode-7/show) [12$]
-
-This toy application is an __experiment__ on how to do it inline with Ivar Jacobsons and Robert C. Martins recommendations.
-
-## According to Uncle Bob
-
- * Architecture is __not__ about frameworks and tools
+ * Architecture is not about frameworks and tools
  * Architecture is about __use cases__
- * Architecture should not depend on frameworks
- * Architecture should not depend on a frontend (delivery mechanism)
- * Architecture should not depend on a backend (persistence mechanism)
+ * Architecture should be isolated from frameworks
+ * Architecture should be isolated from a frontend (delivery mechanism)
+ * Architecture should be isolated from a backend (persistence mechanism)
 
 That is, while frameworks, frontend, and backend are obviously necessary,
 architecture should be isolated from them.
@@ -37,8 +32,8 @@ __Web__ application is the only available frontend right now.
    This prevents controllers from being tested in isolation from the application.
    Instead of hard coding concrete use case classes controllers should probably
    use an abstract factory.
- * Entities are not completely "web" free.
-   For example they include ActiveModel::Conversions module which adds #to_param method.
+ * Entities are not 100% "web" free.
+   They include ActiveModel::Conversions module which adds #to_param method.
    Instead, this module should probably be included on the fly by a Presenter
    into the singleton class of the data structure which represents the said
    Entity in a ResponseModel.
