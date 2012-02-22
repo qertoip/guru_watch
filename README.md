@@ -33,6 +33,10 @@ __Web__ application is the only available frontend right now.
 
 ## Choosen architectural issues in the current implementation
 
+ * Controllers depend on concrete use cases instead of use case interfaces.
+   This prevents controllers from being tested in isolation from the application.
+   Instead of hard coding concrete use case classes controllers should probably
+   use an abstract factory.
  * Entities are not completely "web" free.
    For example they include ActiveModel::Conversions module which adds #to_param method.
    Instead, this module should probably be included on the fly by a Presenter
@@ -40,17 +44,19 @@ __Web__ application is the only available frontend right now.
    Entity in a ResponseModel.
  * Entities leak into the controller and views.
    ResponseModel references them, pretending they are data structures.
- * Controllers depend on concrete use cases instead of use case interfaces.
-   This prevents controllers from being tested in isolation from the application.
-   Instead of hard coding concrete use case classes controllers should probably
-   use an abstract factory.
 
 ## Choosen todos
 
- * Namespace the tests like the code.
  * Implement active record backend.
- * Make test.log work.
- * Make test env work.
+ * Make log/test.log work.
+ * Make RAILS_ENV work.
+ * Non-rails code reloading.
+ * Make rails rake tasks available.
+ * Easier web app starting.
+
+And of course...
+
+ * The web app itself.
 
 ## License
 
