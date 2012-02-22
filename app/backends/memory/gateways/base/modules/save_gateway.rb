@@ -16,9 +16,10 @@ module Backends
           id = new_id( hashes )
           hash['id'] = id
           entity.id = id
+          hashes << hash
+        else
+          update_hashes( hashes, hash )
         end
-
-        hashes << hash
 
         nil
       end
@@ -49,6 +50,12 @@ module Backends
           end while existing_hashes.map{ |h| h['id'] }.include?( rand_id )
 
           rand_id
+        end
+
+        def update_hashes( hashes, hash )
+          existing_hash = hashes.find{ |h| h['id'] == hash['id'] }
+          hashes.delete( existing_hash )
+          hashes << hash
         end
 
     end

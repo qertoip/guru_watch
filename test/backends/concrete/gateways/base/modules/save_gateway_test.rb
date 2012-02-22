@@ -58,6 +58,19 @@ module Backends
             assert_equal( dog.id, found_dog.id )
           end
 
+          it 'updates existing object' do
+            dog = Dog.new
+            dog_gateway = DogGateway.new( @backend, dog )
+            dog_gateway.save_without_validation
+
+            dog.name = 'Updated name'
+            dog_gateway = DogGateway.new( @backend, dog )
+            dog_gateway.save_without_validation
+
+            reloaded_dog = DogGateway.new( @backend ).find( dog.id )
+            assert_equal( 'Updated name', reloaded_dog.name )
+          end
+
           it 'stores *copy* of the object (not just a reference)' do
             mem_dog = Dog.new( :name => 'Vader' )
             dog_gateway = DogGateway.new( @backend, mem_dog )

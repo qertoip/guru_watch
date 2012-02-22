@@ -19,4 +19,9 @@ class GurusController < ApplicationController
     @rm = EditGuru.new( :id => params[:id] ).exec
   end
 
+  def update
+    @rm = UpdateGuru.new( :id => params[:id], :atts => params[:guru] ).exec
+    @rm.ok? ? redirect_to( gurus_path ) : render( :edit )
+  end
+
 end

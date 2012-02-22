@@ -7,7 +7,7 @@ module UseCases
     def exec
       guru = db[Guru].find( request.id )
 
-      if db.update_attributes( guru, request.atts )
+      if db[guru].update_attributes( request.atts )
         Response.new( :guru => guru )
       else
         Response.new( :guru => guru, :errors => guru.errors )

@@ -1,8 +1,9 @@
 # -*- coding: UTF-8 -*-
 
 require_relative 'modules/create_gateway'
-require_relative 'modules/save_gateway'
 require_relative 'modules/retrieve_gateway'
+require_relative 'modules/save_gateway'
+require_relative 'modules/update_attributes_gateway'
 
 module Backends
 
@@ -11,8 +12,9 @@ module Backends
     class Gateway < Abstract::Gateway
 
       include CreateGateway
-      include SaveGateway
       include RetrieveGateway
+      include SaveGateway
+      include UpdateAttributesGateway
 
       protected
 
