@@ -7,14 +7,14 @@ module Backends
     module CreateGateway
 
       def create( attributes = {} )
-        entity = entity_class.new( attributes )
-        save( entity )
+        self.entity = entity_class.new( attributes )
+        save
         entity
       end
 
       def create!( attributes = {} )
-        entity = entity_class.new( attributes )
-        save!( entity )
+        self.entity = entity_class.new( attributes )
+        save!
         entity
       end
 

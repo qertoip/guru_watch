@@ -5,7 +5,7 @@ module UseCases
   class EditGuru < UseCase
 
     def exec
-      guru = db.object( Guru ).find( request.id )
+      guru = db[Guru].find( request.id )
       Response.new( :guru => guru )
     end
 

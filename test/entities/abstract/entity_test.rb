@@ -17,7 +17,7 @@ module Entities
         attribute :active, :type => Boolean
       end
 
-      describe ".new" do
+      describe '.new' do
 
         it 'initializes without arguments' do
           Dog.new

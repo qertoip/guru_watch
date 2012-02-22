@@ -31,21 +31,23 @@ module Backends
         end
 
         before do
-          backend = backend_module::Backend.new
-          @dog_gateway = DogGateway.new( backend )
-          @cat_gateway = CatGateway.new( backend )
+          @backend = backend_module::Backend.new
+          @cat_gateway = CatGateway.new( @backend )
+          @dog_gateway = DogGateway.new( @backend )
         end
 
         describe '.first' do
 
           it 'returns the first object' do
-            2.times{ @cat_gateway.save( Cat.new ); @dog_gateway.save( Dog.new ) }
+            create_four_animals
             dog = @dog_gateway.first
             assert_equal( Dog, dog.class )
           end
 
           it 'ensures the returned object is a copy of the persistent one' do
-            @dog_gateway.save( Dog.new( :name => 'Doggy' ) )
+            dog = Dog.new( :name => 'Doggy' )
+            DogGateway.new( @backend, dog ).save
+
             @dog_gateway.first.name[3] = '!'
 
             fresh_dog = @dog_gateway.first
@@ -53,7 +55,7 @@ module Backends
           end
 
           it 'returns nil if there are no objects' do
-            dog = @dog_gateway.first
+            dog = DogGateway.new( @backend ).first
             assert_nil( dog )
           end
 
@@ -62,7 +64,7 @@ module Backends
         describe '.all' do
 
           it 'returns list of objects of the specified type' do
-            2.times{ @dog_gateway.save( Dog.new ); @cat_gateway.save( Cat.new ) }
+            create_four_animals
             cats = @cat_gateway.all
             assert_equal( 2, cats.size )
             cats.each do |cat|
@@ -80,10 +82,10 @@ module Backends
         describe '.where' do
 
           it 'selects objects meeting passed conditions' do
-            @dog_gateway.save( Dog.new( :name => 'Daisy', :age => 3 ) )
-            @dog_gateway.save( Dog.new( :name => 'Monster', :age => 6 ) )
-            @dog_gateway.save( Dog.new( :name => 'Lenny', :age => 10 ) )
-            @dog_gateway.save( Dog.new( :name => 'Nelson', :age => 6) )
+            DogGateway.new( @backend, Dog.new( :name => 'Daisy', :age => 3 ) ).save!
+            DogGateway.new( @backend, Dog.new( :name => 'Monster', :age => 6 ) ).save!
+            DogGateway.new( @backend, Dog.new( :name => 'Lenny', :age => 10 ) ).save!
+            DogGateway.new( @backend, Dog.new( :name => 'Nelson', :age => 6 ) ).save!
             query = Backends::Query.new( @dog_gateway ).where( :age => 6 )
             dogs = @dog_gateway.all( query )
             assert_equal( 2, dogs.size )
@@ -97,11 +99,11 @@ module Backends
         describe '.where_not' do
 
           it 'selects objects not meeting passed conditions' do
-            @dog_gateway.save( Dog.new( :name => 'Daisy', :age => 3 ) )
-            @dog_gateway.save( Dog.new( :name => 'Monster', :age => 6 ) )
-            @dog_gateway.save( Dog.new( :name => 'Lenny', :age => 10 ) )
-            @dog_gateway.save( Dog.new( :name => 'Nelson', :age => 6) )
-            @dog_gateway.save( Dog.new( :name => 'Lenny', :age => 12 ) )
+            DogGateway.new( @backend, Dog.new( :name => 'Daisy', :age => 3 ) ).save!
+            DogGateway.new( @backend, Dog.new( :name => 'Monster', :age => 6 ) ).save!
+            DogGateway.new( @backend, Dog.new( :name => 'Lenny', :age => 10 ) ).save!
+            DogGateway.new( @backend, Dog.new( :name => 'Nelson', :age => 6 ) ).save!
+            DogGateway.new( @backend, Dog.new( :name => 'Lenny', :age => 12 ) ).save!
             query = Backends::Query.new( @dog_gateway ).where_not( :age => 6 )
             dogs = @dog_gateway.all( query )
             assert_equal( 3, dogs.size )
@@ -116,16 +118,14 @@ module Backends
 
           it 'finds the object by id' do
             # Add noise data
-            2.times{ @dog_gateway.save( Dog.new ) }
-            2.times{ @cat_gateway.save( Cat.new ) }
+            create_four_animals
 
             # Add the dog we'll be searching for
             the_right_dog = Dog.new
-            @dog_gateway.save( the_right_dog )
+            DogGateway.new( @backend, the_right_dog ).save
 
             # Add more noise data
-            2.times{ @dog_gateway.save( Dog.new ) }
-            2.times{ @cat_gateway.save( Cat.new ) }
+            create_four_animals
 
             # id:Integer
             found_dog = @dog_gateway.find( the_right_dog.id )
@@ -140,13 +140,20 @@ module Backends
 
           it 'raises ObjectNotFound exception' do
             assert_raises( Backends::ObjectNotFound ) do
-              @dog_gateway.save( Dog.new )
+              DogGateway.new( @backend, Dog.new ).save
               @dog_gateway.find( 764575723 )
             end
           end
 
         end
 
+      end
+
+      def create_four_animals
+        2.times do
+          CatGateway.new(@backend, Cat.new).save!
+          DogGateway.new(@backend, Dog.new).save!
+        end
       end
 
     end

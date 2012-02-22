@@ -5,7 +5,7 @@ module UseCases
   class ListGurus < UseCase
 
     def exec
-      gurus = db.objects( Guru ).all
+      gurus = db[Guru].all
       Response.new( :gurus => gurus )
     end
 

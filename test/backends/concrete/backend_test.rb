@@ -24,35 +24,6 @@ module Backends
           @db = backend_module::Backend.new
         end
 
-        describe ".save_without_validation" do
-
-          it "deduces gateway and passes the call" do
-            dog = Dog.new
-            @db.save_without_validation( dog )
-            assert( dog.id )
-          end
-
-        end
-
-        describe ".save" do
-
-          it "deduces gateway and passes the call" do
-            dog = Dog.new
-            assert( @db.save( dog ) )
-            assert( dog.id )
-          end
-
-        end
-
-        describe ".save!" do
-
-          it "deduces gateway and passes the call" do
-            dog = Dog.new
-            assert( @db.save!( dog ) )
-          end
-
-        end
-
         describe ".transaction" do
 
           it "rollbacks data to the pre-transaction state on StandardError" do
@@ -83,14 +54,15 @@ module Backends
 
         begin
           @db.transaction do
-            @db.save!( Dog.new( :name => dog_name ) )
-            assert( @db.object( Dog ).where( :name => dog_name ).first )
+            dog = Dog.new( :name => dog_name )
+            @db[dog].save!
+            assert( @db[Dog].where( :name => dog_name ).first )
             block_executed = true
             raise exception_class
           end
         rescue exception_class => e
           assert( block_executed, "Block didn't executed: #{e.message}" )
-          assert_nil( @db.object( Dog ).where( :name => dog_name ).first )
+          assert_nil( @db[Dog].where( :name => dog_name ).first )
         end
       end
 

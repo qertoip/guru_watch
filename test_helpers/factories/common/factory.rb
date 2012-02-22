@@ -4,7 +4,8 @@ module Factory
 
   def create_valid!( attributes = {} )
     object = new_valid( attributes )
-    GuruWatch.instance.config.backend.save!( object )  # hack
+    db = GuruWatch.instance.config.backend
+    db[object].save!
     object
   end
 

@@ -6,7 +6,7 @@ module Backends
 
     module SaveGateway
 
-      def save_without_validation( entity )
+      def save_without_validation
         class_name = entity.class.name
 
         hash = entity_to_hash( entity )
@@ -23,18 +23,18 @@ module Backends
         nil
       end
 
-      def save( entity )
+      def save
         if entity.valid?
-          save_without_validation( entity )
+          save_without_validation
           true
         else
           false
         end
       end
 
-      def save!( entity )
+      def save!
         if entity.valid?
-          save_without_validation( entity )
+          save_without_validation
           true
         else
           raise ObjectInvalid.new( entity.errors.inspect )

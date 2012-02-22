@@ -9,10 +9,6 @@ module UseCases
     it "creates example gurus" do
       response = SeedDatabase.new.exec
       assert( response.ok? )
-
-      #assert_equal( atts[:name], guru.name )
-      #assert_equal( atts[:homepage], guru.homepage )
-      #assert_equal( atts[:description], guru.description )
     end
 
   end

@@ -6,10 +6,11 @@ module Backends
 
     class Gateway
 
-      attr_accessor :backend
+      attr_accessor :backend, :entity
 
-      def initialize( backend )
+      def initialize( backend, entity = nil )
         self.backend = backend
+        self.entity = entity
       end
 
       class << self

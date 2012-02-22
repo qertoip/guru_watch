@@ -18,29 +18,24 @@ module Backends
         @db = Backend.new
       end
 
-      describe '.object' do
-
-        it 'deduces a Gateway for the passed Entity, wraps it into a Query and returns that Query' do
-          query = @db.object( Cat )
-          assert_query_is_correct( query )
-        end
-
-      end
-
-      describe '.objects' do
-
-        it 'is an alias for #object method' do
-          query = @db.objects( Cat )
-          assert_query_is_correct( query )
-        end
-
-      end
-
       describe '.[] operator' do
 
-        it 'is an alias for #object method' do
-          query = @db[Cat]
-          assert_query_is_correct( query )
+        describe 'when passed a class' do
+
+          it 'deduces a Gateway for the passed class, wraps it into a Query and returns that Query' do
+            query = @db[Cat]
+            assert_query_is_correct( query )
+          end
+
+        end
+
+        describe 'when passed an object' do
+
+          it 'deduces a Gateway for the passed object and returns that Gateway' do
+            gateway = @db[Cat.new]
+            assert_gateway_is_correct( gateway )
+          end
+
         end
 
       end
@@ -49,6 +44,12 @@ module Backends
         correct_gateway_class = CatGateway.new(db).class
         assert_equal( Query, query.class )
         assert_equal( correct_gateway_class, query.gateway.class )
+      end
+
+      def assert_gateway_is_correct( gateway )
+        correct_gateway_class = CatGateway.new( db ).class
+        assert_equal( CatGateway, gateway.class )
+        assert_equal( correct_gateway_class, gateway.class )
       end
 
     end

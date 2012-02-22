@@ -9,7 +9,7 @@ module UseCases
       response = Response.new( :guru => guru )
 
       if guru.valid?
-        db.save( guru )
+        db[guru].save
       else
         response.errors = guru.errors
       end

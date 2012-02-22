@@ -6,11 +6,11 @@ module UseCases
 
   class CreateGuruTest < MiniTest::Spec
 
-    it "creates a new Guru" do
+    it 'creates a new Guru' do
       atts = {
-          :name => "Robert C. Martin AKA Uncle Bob",
-          :homepage => "http://www.8thlight.com/our-team/robert-martin",
-          :description => "An award winning author, renowned speaker, and über software geek since 1970. He is the founder and president of Uncle Bob Consulting and Object Mentor."
+          :name => 'Robert C. Martin AKA Uncle Bob',
+          :homepage => 'http://www.8thlight.com/our-team/robert-martin',
+          :description => 'An award winning author, renowned speaker, and über software geek since 1970. He is the founder and president of Uncle Bob Consulting and Object Mentor.'
       }
 
       response = CreateGuru.new( :atts => atts ).exec
@@ -23,7 +23,7 @@ module UseCases
       assert_equal( atts[:description], guru.description )
     end
 
-    it "returns errors if the passed request is invalid" do
+    it 'returns errors if the passed request is invalid' do
       response = CreateGuru.new( :name => '' ).exec
       refute( response.ok? )
       assert( response.errors )
