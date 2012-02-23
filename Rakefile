@@ -16,6 +16,6 @@ Rake::TestTask.new( "test:frontends" ) do |t|
   t.verbose = true
 end
 
-task :test => ['test:app', 'test:frontends']
+task test: ['test:app', 'test:frontends']
 
-task :default => :test
+task default: :test
