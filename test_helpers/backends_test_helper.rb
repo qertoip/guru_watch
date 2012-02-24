@@ -3,6 +3,8 @@
 ENV['APP_ENV'] = 'test'
 
 require_relative( '../app/application' )
+require_relative( '../app/backends/memory/all' )
+require_relative( '../app/backends/activerecord/all' )
 
 require 'minitest/autorun'
 

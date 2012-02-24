@@ -13,6 +13,10 @@ module Backends
         self.transactions = []
       end
 
+      def establish_connection
+        # Do nothing as this is a memory backend
+      end
+
       def transaction
         begin_transaction
         begin

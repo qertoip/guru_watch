@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-require 'app_test_helper'
+require 'backends_test_helper'
 
 module Backends
 
@@ -27,8 +27,8 @@ module Backends
       @query = Query.new( CatGateway.new( Backend.new ) )
     end
 
-    describe ".where" do
-      it "returns query with the where option set" do
+    describe '.where' do
+      it 'returns query with the where option set' do
         conditions = { :name => 'Kitty' }
         @query = @query.where( conditions )
         assert_equal( Query, @query.class )
@@ -36,8 +36,8 @@ module Backends
       end
     end
 
-    describe ".where_not" do
-      it "returns query with the where_not option set" do
+    describe '.where_not' do
+      it 'returns query with the where_not option set' do
         conditions = { :name => 'Kitty' }
         @query = @query.where_not( conditions )
         assert_equal( Query, @query.class )
@@ -45,8 +45,8 @@ module Backends
       end
     end
 
-    describe ".order" do
-      it "returns query with the order option set" do
+    describe '.order' do
+      it 'returns query with the order option set' do
         order = { :name => :asc }
         @query = @query.order( order )
         assert_equal( Query, @query.class )
@@ -54,26 +54,26 @@ module Backends
       end
     end
 
-    describe ".first" do
-      it "calls gateway.first passing it self" do
+    describe '.first' do
+      it 'calls gateway.first passing it self' do
         @query.first
       end
     end
 
-    describe ".all" do
-      it "calls gateway.all passing it self" do
+    describe '.all' do
+      it 'calls gateway.all passing it self' do
         @query.all
       end
     end
 
-    describe ".find" do
-      it "calls gateway.find passing it self and id" do
+    describe '.find' do
+      it 'calls gateway.find passing it self and id' do
         @query.find( 1 )
       end
     end
 
-    describe ".create!" do
-      it "calls gateway.create! by passing it self" do
+    describe '.create!' do
+      it 'calls gateway.create! by passing it self' do
         @query.create!
       end
     end

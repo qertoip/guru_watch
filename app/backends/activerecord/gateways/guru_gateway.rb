@@ -7,8 +7,11 @@ module Backends
     class GuruGateway < Gateway
 
       entity_class Entities::Guru
-      class Model < ::ActiveRecord::Base; end
+      class Guru < ::ActiveRecord::Base; end
 
+      def model_class
+        Guru
+      end
     end
 
   end

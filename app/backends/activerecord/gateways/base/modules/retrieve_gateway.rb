@@ -17,7 +17,7 @@ module Backends
         query ||= Query.new( self )
         relation = query_to_relation( query )
         model = relation.first
-        model_to_entity( model )
+        model_to_entity( model ) if model
       end
 
       def find( id, query = nil )
@@ -33,7 +33,7 @@ module Backends
       private
 
         def query_to_relation( query )
-          relation = Model.scoped
+          relation = model_class.scoped
           relation = add_where( relation, query )
           relation = add_where_not( relation, query )
           relation

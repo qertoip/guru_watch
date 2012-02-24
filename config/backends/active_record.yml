@@ -7,6 +7,7 @@ development:
   password: test123
   host: localhost
   port: 5432
+  min_messages: WARNING     # don't show many verbose NOTICEs
 
 test:
   adapter: postgresql
@@ -17,3 +18,4 @@ test:
   password: test123
   host: localhost
   port: 5432
+  min_messages: WARNING     # don't show many verbose NOTICEs

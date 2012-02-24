@@ -27,6 +27,11 @@ module Backends
           gateway_class.new( self, entity )
         end
 
+        def deduce_gateway_from( entity_class )
+          gateway_class = deduce_gateway_class_from( entity_class )
+          gateway_class.new( self )
+        end
+
         def deduce_gateway_class_from( entity_class )
           gateway_class_name = "#{entity_class.name.demodulize}Gateway"
 
@@ -45,11 +50,6 @@ module Backends
           end
 
           gateway_class
-        end
-
-        def deduce_gateway_from( entity_class )
-          gateway_class = deduce_gateway_class_from( entity_class )
-          gateway_class.new( self )
         end
 
     end

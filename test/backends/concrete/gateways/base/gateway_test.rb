@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-require 'app_test_helper'
+require 'backends_test_helper'
 
 module Backends
 

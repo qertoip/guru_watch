@@ -3,7 +3,7 @@
 class MiniTest::Spec
 
   def db
-    GuruWatch.instance.config.backend
+    Application.instance.config.backend
   end
 
 end

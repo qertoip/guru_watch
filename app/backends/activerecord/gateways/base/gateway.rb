@@ -23,7 +23,7 @@ module Backends
         end
 
         def entity_to_model( entity )
-          Model.new( entity.attributes )
+          model_class.new( entity.attributes )
         end
 
         def model_to_entity( model )
