@@ -6,8 +6,8 @@ module RubyPersistenceAPI
 
     class Backend < Abstract::Backend
 
-      def establish_connection
-        ::ActiveRecord::Base.establish_connection(configs_for_environment.first)
+      def connect!( config )
+        ::ActiveRecord::Base.establish_connection( config )
       end
 
       def transaction
@@ -24,25 +24,25 @@ module RubyPersistenceAPI
 
       private
 
-        def load_config
-          require 'erb'
-          # paths = Application.instance.config.paths
-          paths = {
-              'config/database' => ["#{Application.instance.root}/config/backends/active_record.yml"],
-              'db/migrate' => ["#{Application.instance.root}/app/backends/active_record/migrations"]
-          }
-
-          database_configuration = YAML::load(ERB.new(IO.read(paths['config/database'].first)).result)
-          ::ActiveRecord::Base.configurations = database_configuration
-          ::ActiveRecord::Migrator.migrations_paths = paths['db/migrate'].to_a
-        end
-
-        def configs_for_environment
-          load_config
-          environments = [Application.instance.env]
-          environments << 'test' if Application.instance.env == 'development'
-          ::ActiveRecord::Base.configurations.values_at(*environments).compact.reject { |config| config['database'].blank? }
-        end
+        #def load_config
+        #  require 'erb'
+        #  # paths = Application.instance.config.paths
+        #  paths = {
+        #      'config/database' => ["#{Application.instance.root}/config/backends/active_record.yml"],
+        #      'db/migrate' => ["#{Application.instance.root}/app/backends/active_record/migrations"]
+        #  }
+        #
+        #  database_configuration = YAML::load(ERB.new(IO.read(paths['config/database'].first)).result)
+        #  ::ActiveRecord::Base.configurations = database_configuration
+        #  ::ActiveRecord::Migrator.migrations_paths = paths['db/migrate'].to_a
+        #end
+        #
+        #def configs_for_environment
+        #  load_config
+        #  environments = [Application.instance.env]
+        #  environments << 'test' if Application.instance.env == 'development'
+        #  ::ActiveRecord::Base.configurations.values_at(*environments).compact.reject { |config| config['database'].blank? }
+        #end
 
     end
 

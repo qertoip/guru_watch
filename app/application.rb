@@ -60,7 +60,7 @@ class Application
       require_relative '../lib/ruby_persistence_api/active_record/all'
       require_relative 'backends/active_record/all'
       config.backend = RubyPersistenceAPI::ActiveRecord::Backend.new
-      config.backend.establish_connection
+      config.backend.connect!( load_active_record_config )
     end
 
     def init_backend
@@ -71,6 +71,15 @@ class Application
         else
           raise StandardError.new( 'Unknown environment ' + env )
       end
+    end
+
+  private
+
+    def load_active_record_config
+      config_path = "#{root}/config/backends/active_record.yml"
+      config_yaml = YAML::load(ERB.new(IO.read(config_path)).result)
+      config_hash = config_yaml[env]
+      config_hash
     end
 
 end

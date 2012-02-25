@@ -1,12 +1,12 @@
 # -*- coding: UTF-8 -*-
 
-require 'backends_test_helper'
+require 'rpa_test_helper'
 
 module RubyPersistenceAPI
 
   module Abstract
 
-    class GatewayTest < ActiveSupport::TestCase
+    class GatewayTest < RubyPersistenceAPI::TestCase
 
       class Entity; include ActiveAttr::Model end
       class Dog < Entity; end

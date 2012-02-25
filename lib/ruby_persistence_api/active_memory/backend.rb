@@ -13,7 +13,7 @@ module RubyPersistenceAPI
         self.transactions = []
       end
 
-      def establish_connection
+      def connect!
         # Do nothing as this is a memory backend
       end
 

@@ -25,7 +25,7 @@ module RubyPersistenceAPI
         relation = query_to_relation( query )
         begin
           relation.find( id )
-        rescue ActiveRecord::RecordNotFound => e
+        rescue ::ActiveRecord::RecordNotFound => e
           raise ObjectNotFound.new( "#{entity_class.name}/#{id} not found" )
         end
       end
@@ -50,7 +50,7 @@ module RubyPersistenceAPI
           return relation unless conditions
 
           conditions.each do |attr, value|
-            sanitized_attr = ActiveRecord::Base.sanitize( attr )
+            sanitized_attr = ::ActiveRecord::Base.sanitize( attr )
             relation = relation.where( ["#{sanitized_attr} != ?", value] )
           end
 

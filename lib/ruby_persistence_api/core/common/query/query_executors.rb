@@ -16,6 +16,10 @@ module RubyPersistenceAPI
       gateway.find( id, self )
     end
 
+    def create( attributes = {} )
+      gateway.create( attributes )
+    end
+
     def create!( attributes = {} )
       gateway.create!( attributes )
     end

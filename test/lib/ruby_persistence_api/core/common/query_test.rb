@@ -1,10 +1,10 @@
 # -*- coding: UTF-8 -*-
 
-require 'backends_test_helper'
+require 'rpa_test_helper'
 
 module RubyPersistenceAPI
 
-  class QueryTest < ActiveSupport::TestCase
+  class QueryTest < RubyPersistenceAPI::TestCase
 
     class Entity; include ActiveAttr::Model end
     class Dog < Entity; attr_accessor :id, :name; end
@@ -13,6 +13,7 @@ module RubyPersistenceAPI
       def first( query ) end
       def all( query ) end
       def find( query, id ) end
+      def create( attributes = {} ) end
       def create!( attributes = {} ) end
     end
     class DogGateway < ConcreteGateway; end
@@ -74,6 +75,14 @@ module RubyPersistenceAPI
 
       test 'calls gateway.find passing it self and id' do
         @query.find( 1 )
+      end
+
+    end
+
+    class M_create < self
+
+      test 'calls gateway.create! by passing it self' do
+        @query.create
       end
 
     end
