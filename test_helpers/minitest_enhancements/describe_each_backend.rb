@@ -10,3 +10,11 @@ class MiniTest::Spec
   end
 
 end
+
+class MiniTest::Unit::TestCase
+
+  def self.backend_modules
+    [::Backends::Memory, ::Backends::ActiveRecord]
+  end
+
+end

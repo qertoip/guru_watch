@@ -6,7 +6,7 @@ module Backends
 
   module Abstract
 
-    class BackendTest < MiniTest::Unit::TestCase
+    class BackendTest < ActiveSupport::TestCase
 
       include ::Entities
 
@@ -18,15 +18,14 @@ module Backends
         @db = Backend.new
       end
 
-          # []
-      class BracketsOperatorMethod < BackendTest
+      class Method_brackets < BackendTest  # .[]
 
-        def when_passed_a_class_deduces_a_gateway_then_wraps_it_into_a_query_and_returns_that_query_TEST
+        test 'when passed a class deduces a gateway then wraps it into a query and returns that query' do
           query = @db[Cat]
           assert_query_is_correct( query )
         end
         
-        def when_passed_an_object_deduces_a_gateway_for_the_passed_object_and_returns_that_gateway_TEST
+        test 'when passed an object deduces a gateway for the passed object and returns that gateway' do
           gateway = @db[Cat.new]
           assert_gateway_is_correct( gateway )
         end

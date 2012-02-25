@@ -7,7 +7,7 @@ module Backends
 
   module ActiveRecord
 
-    class BackendTest < MiniTest::Unit::TestCase
+    class BackendTest < ActiveSupport::TestCase
 
       class Dog < Entities::Entity
         attribute :id, :type => Integer

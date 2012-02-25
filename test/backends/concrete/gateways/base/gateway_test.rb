@@ -6,9 +6,9 @@ module Backends
 
   module Concrete
 
-    class GatewayTest < MiniTest::Spec
+    class GatewayTest < ActiveSupport::TestCase
 
-      # see in the modules/
+      # see in the modules
 
     end
 

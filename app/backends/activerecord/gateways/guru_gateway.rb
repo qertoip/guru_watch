@@ -8,10 +8,7 @@ module Backends
 
       entity_class Entities::Guru
       class Guru < ::ActiveRecord::Base; end
-
-      def model_class
-        Guru
-      end
+      def model_class; Guru end
     end
 
   end

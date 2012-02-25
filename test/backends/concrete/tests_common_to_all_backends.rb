@@ -13,29 +13,29 @@ module Backends
 
       # self == base (the class into which this module is included)
 
-      class self::EstablishConnectionMethod < self
+      class self::M_establish_connection < self
 
-        def does_not_raise_exception_TEST
+        test 'does_not_raise_exception' do
           @db.establish_connection
         end
 
       end
 
-      class self::TransactionMethod < self
+      class self::M_transaction < self
 
-        def rollbacks_data_to_the_pre_transaction_state_on_StandardError_TEST
+        test 'rollbacks_data_to_the_pre_transaction_state_on_StandardError' do
           assert_rollback_on( StandardError )
         end
 
-        def rollbacks_data_to_the_pre_transaction_state_on_Exception_TEST
+        test 'rollbacks_data_to_the_pre_transaction_state_on_Exception' do
           assert_rollback_on( Exception )
         end
 
-        def rollbacks_data_to_the_pre_transaction_state_on_Rollback_TEST
+        test 'rollbacks_data_to_the_pre_transaction_state_on_Rollback' do
           assert_rollback_on( Backends::Rollback )
         end
 
-        def swallows_Rollback_pseudo_exception_TEST
+        test 'swallows_Rollback_pseudo_exception' do
           @db.transaction do
             raise Backends::Rollback
           end
