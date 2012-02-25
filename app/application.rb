@@ -13,8 +13,7 @@ class Application
     require_bundler_default_group
     require_lib
     require_app
-    require_backend
-    connect_to_database
+    init_backend
   end
 
   def config
@@ -44,30 +43,36 @@ class Application
     end
 
     def require_app
-      require_relative 'backends/api/all'
+      # require_relative 'backends/api/all'
       require_relative 'entities/all'
       require_relative 'use_cases/all'
     end
 
-    def require_backend
+    def init_active_memory_backend
+      Bundler.require( :active_memory_backend )
+      require_relative '../lib/ruby_persistence_api/active_memory/all'
+      require_relative 'backends/active_memory/all'
+      config.backend = RubyPersistenceAPI::ActiveMemory::Backend.new
+    end
+
+    def init_active_record_backend
+      Bundler.require( :active_record_backend )
+      require_relative '../lib/ruby_persistence_api/active_record/all'
+      require_relative 'backends/active_record/all'
+      config.backend = RubyPersistenceAPI::ActiveRecord::Backend.new
+      config.backend.establish_connection
+    end
+
+    def init_backend
       case env
-        when 'test'
-          require_relative 'backends/memory/all'
-          config.backend = Backends::Memory::Backend.new
-        when 'development'
-          require_relative 'backends/memory/all'
-          config.backend = Backends::Memory::Backend.new
-        when 'production'
-          require_relative 'backends/activerecord/all'
-          config.backend = Backends::ActiveRecord::Backend.new
+        when 'test' then init_active_memory_backend
+        when 'development' then init_active_memory_backend
+        when 'production' then init_active_record_backend
         else
           raise StandardError.new( 'Unknown environment ' + env )
       end
     end
 
-    def connect_to_database
-      config.backend.establish_connection
-    end
 end
 
 Application.instance.initialize!

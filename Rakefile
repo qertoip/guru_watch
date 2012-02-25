@@ -2,9 +2,9 @@
 
 require 'rake/testtask'
 
-Rake::TestTask.new( "test:backends" ) do |t|
+Rake::TestTask.new( "test:rpa" ) do |t|
   t.libs << ["app", "lib", "test_helpers"]
-  t.test_files = FileList["test/backends/**/*_test.rb"]
+  t.test_files = FileList["test/lib/ruby_persistence_api/**/*_test.rb"]
   t.verbose = true
 end
 
@@ -22,6 +22,6 @@ Rake::TestTask.new( "test:frontends" ) do |t|
   t.verbose = true
 end
 
-task test: ['test:backends', 'test:app', 'test:frontends']
+task test: ['test:rpa', 'test:app', 'test:frontends']
 
 task default: :test

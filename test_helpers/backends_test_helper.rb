@@ -3,12 +3,12 @@
 ENV['APP_ENV'] = 'test'
 
 require_relative( '../app/application' )
-require_relative( '../app/backends/memory/all' )
-require_relative( '../app/backends/activerecord/all' )
+#require_relative( '../app/backends/active_memory/all' )
+#require_relative( '../app/backends/active_record/all' )
 
 def backend_modules
-  [::Backends::Memory]
-  # [::Backends::Memory, ::Backends::ActiveRecord]
+  [::RubyPersistenceAPI::ActiveMemory]
+  # [::RubyPersistenceAPI::Memory, ::RubyPersistenceAPI::ActiveRecord]
 end
 
 require 'minitest/autorun'

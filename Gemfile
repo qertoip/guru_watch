@@ -14,12 +14,12 @@ gem 'active_attr', :git => 'https://github.com/cgriego/active_attr.git'
 # Backends
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-group :activerecord_backend do
+group :active_record_backend do
   gem 'pg'
   gem 'activerecord', :require => 'active_record'
 end
 
-group :memory_backend do
+group :active_memory_backend do
 end
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

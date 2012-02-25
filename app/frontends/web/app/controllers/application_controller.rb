@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   include UseCases
 
-  rescue_from Backends::ObjectNotFound, :with => :show_404
+  rescue_from RubyPersistenceAPI::ObjectNotFound, :with => :show_404
 
   ## This abstract factory returns a use case implementation depending
   ## on the ...

@@ -13,7 +13,7 @@ class MiniTest::Spec
 
     db.transaction do
       ret_value = run_without_transaction_rollback( *args )
-      raise Backends::Rollback
+      raise RubyPersistenceAPI::Rollback
     end
 
     ret_value  # The result of run must be always returned for formatters to work correctly
