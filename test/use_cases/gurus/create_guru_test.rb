@@ -4,9 +4,9 @@ require 'app_test_helper'
 
 module UseCases
 
-  class CreateGuruTest < MiniTest::Spec
+  class CreateGuruTest < GuruWatch::TestCase
 
-    it 'creates a new Guru' do
+    test 'creates a new Guru' do
       atts = {
           :name => 'Robert C. Martin AKA Uncle Bob',
           :homepage => 'http://www.8thlight.com/our-team/robert-martin',
@@ -23,7 +23,7 @@ module UseCases
       assert_equal( atts[:description], guru.description )
     end
 
-    it 'returns errors if the passed request is invalid' do
+    test 'returns errors if the passed request is invalid' do
       response = CreateGuru.new( :name => '' ).exec
       refute( response.ok? )
       assert( response.errors )

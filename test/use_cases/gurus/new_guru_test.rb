@@ -4,9 +4,9 @@ require 'app_test_helper'
 
 module UseCases
 
-  class NewGuruTest < MiniTest::Spec
+  class NewGuruTest < GuruWatch::TestCase
 
-    it "returns a new Guru with a default values" do
+    test 'returns a new Guru with a default values' do
       response = NewGuru.new.exec
       assert( response.guru )
     end

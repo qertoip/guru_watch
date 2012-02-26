@@ -4,9 +4,9 @@ require 'app_test_helper'
 
 module UseCases
 
-  class EditGuruTest < MiniTest::Spec
+  class EditGuruTest < GuruWatch::TestCase
 
-    it "returns a guru for edition" do
+    test 'returns a guru for edition' do
       guru = Entities::Guru.create_valid!
       response = EditGuru.new( :id => guru.id ).exec
       assert( response.ok? )

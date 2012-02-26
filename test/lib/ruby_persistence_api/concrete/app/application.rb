@@ -19,7 +19,7 @@ module RubyPersistenceAPI
     end
 
     def env
-      ENV['APP_ENV']
+      ENV['BACKEND']
     end
 
     def root
@@ -41,6 +41,7 @@ module RubyPersistenceAPI
       end
 
       def init_active_memory_backend
+        $stdout.puts( 'Initializing ActiveMemory backend...' )
         Bundler.require( :active_memory_backend )
         require_relative '../../../../../lib/ruby_persistence_api/active_memory/all'
         require_relative 'backends/active_memory/all'
@@ -48,6 +49,7 @@ module RubyPersistenceAPI
       end
 
       def init_active_record_backend
+        $stdout.puts( 'Initializing ActiveRecord backend...' )
         Bundler.require( :active_record_backend )
         require_relative '../../../../../lib/ruby_persistence_api/active_record/all'
         require_relative 'backends/active_record/all'
@@ -80,6 +82,13 @@ module RubyPersistenceAPI
       def recreate_schema
         c = ::ActiveRecord::Base.connection
         c.create_table :dogs, :force => true do |t|
+          t.string :name
+          t.integer :age
+          t.decimal :price
+          t.datetime :bought_at
+          t.boolean :active
+        end
+        c.create_table :cats, :force => true do |t|
           t.string :name
           t.integer :age
         end

@@ -6,7 +6,7 @@ module UseCases
 
   class SeedDatabaseTest < MiniTest::Spec
 
-    it "creates example gurus" do
+    it 'creates example gurus' do
       response = SeedDatabase.new.exec
       assert( response.ok? )
     end

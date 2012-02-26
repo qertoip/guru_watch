@@ -21,7 +21,7 @@ class Application
   end
 
   def env
-    ENV['APP_ENV']
+    ENV['APP_ENV'] || 'development'
   end
 
   def root

@@ -2,7 +2,7 @@
 
 require 'frontends_test_helper'
 
-class GurusControllerTest < ActionDispatch::IntegrationTest #ActionDispatch::TestCase
+class GurusControllerTest < ActionDispatch::IntegrationTest
 
   test 'index' do
     get '/gurus'

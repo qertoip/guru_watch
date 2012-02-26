@@ -4,11 +4,11 @@ require 'app_test_helper'
 
 module UseCases
 
-  class UpdateGuruTest < MiniTest::Spec
+  class UpdateGuruTest < GuruWatch::TestCase
 
     include ::Entities
 
-    it 'updates a Guru' do
+    test 'updates a Guru' do
       guru = Guru.create_valid!
 
       atts = { :name => 'Updated name', :description => 'Updated description' }
@@ -21,7 +21,7 @@ module UseCases
       assert_equal( atts[:description], updated_guru.description )
     end
 
-    it 'returns errors if the passed request is invalid' do
+    test 'returns errors if the passed request is invalid' do
       guru = Guru.create_valid!
       response = UpdateGuru.new( :id => guru.id, :atts => { :name => '' } ).exec
       refute( response.ok? )

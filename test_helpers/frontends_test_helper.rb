@@ -6,6 +6,6 @@ require_relative( '../app/frontends/web/config/environment' )
 
 require 'minitest/autorun'
 
-require 'minitest_enhancements/all'
+require 'guru_watch/test_case'
 
 require 'factories/all'

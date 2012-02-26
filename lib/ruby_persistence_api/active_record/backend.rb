@@ -12,7 +12,7 @@ module RubyPersistenceAPI
 
       def transaction
         begin
-          ::ActiveRecord::Base.transaction do
+          ::ActiveRecord::Base.transaction( :requires_new => true ) do
             yield
           end
         rescue Rollback
@@ -21,28 +21,6 @@ module RubyPersistenceAPI
           # transaction rollback and it is meant to be swallowed.
         end
       end
-
-      private
-
-        #def load_config
-        #  require 'erb'
-        #  # paths = Application.instance.config.paths
-        #  paths = {
-        #      'config/database' => ["#{Application.instance.root}/config/backends/active_record.yml"],
-        #      'db/migrate' => ["#{Application.instance.root}/app/backends/active_record/migrations"]
-        #  }
-        #
-        #  database_configuration = YAML::load(ERB.new(IO.read(paths['config/database'].first)).result)
-        #  ::ActiveRecord::Base.configurations = database_configuration
-        #  ::ActiveRecord::Migrator.migrations_paths = paths['db/migrate'].to_a
-        #end
-        #
-        #def configs_for_environment
-        #  load_config
-        #  environments = [Application.instance.env]
-        #  environments << 'test' if Application.instance.env == 'development'
-        #  ::ActiveRecord::Base.configurations.values_at(*environments).compact.reject { |config| config['database'].blank? }
-        #end
 
     end
 

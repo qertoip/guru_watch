@@ -42,7 +42,7 @@ module RubyPersistenceAPI
           gateway_class = known_gateways.find{ |klass| klass.name.demodulize == gateway_class_name }
 
           if gateway_class.nil?
-            raise StandardError.new( "Cannot find #{gateway_class_name} among known gateways: #{gateway_class.map(&:name)}" )
+            raise StandardError.new( "Cannot find #{gateway_class_name} among known gateways: #{known_gateways.map(&:name)}" )
           end
 
           gateway_class

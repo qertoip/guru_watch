@@ -4,11 +4,11 @@ require 'app_test_helper'
 
 module UseCases
 
-  class ListGurusTest < MiniTest::Spec
+  class ListGurusTest < GuruWatch::TestCase
 
     include ::Entities
 
-    it "returns a list of all gurus" do
+    test 'returns a list of all gurus' do
       Guru.create_valid!
       Guru.create_valid!
       response = ListGurus.new.exec
