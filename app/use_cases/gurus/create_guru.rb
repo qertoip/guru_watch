@@ -6,15 +6,13 @@ module UseCases
 
     def exec
       guru = Guru.new( request.atts )
-      response = Response.new( :guru => guru )
 
       if guru.valid?
         db[guru].save
+        Response.new( :guru => guru )
       else
-        response.errors = guru.errors
+        Response.new( :guru => guru, :errors => guru.errors )
       end
-
-      response
     end
 
   end
