@@ -11,9 +11,9 @@ module UseCases
     test 'updates a Guru' do
       guru = Guru.create_valid!
 
-      atts = { :name => 'Updated name', :description => 'Updated description' }
+      atts = { name: 'Updated name', description: 'Updated description' }
 
-      response = UpdateGuru.new( :id => guru.id, :atts => atts ).exec
+      response = UpdateGuru.new( id: guru.id, atts: atts ).exec
 
       assert( response.ok? )
       updated_guru = response.guru
@@ -23,7 +23,7 @@ module UseCases
 
     test 'returns errors if the passed request is invalid' do
       guru = Guru.create_valid!
-      response = UpdateGuru.new( :id => guru.id, :atts => { :name => '' } ).exec
+      response = UpdateGuru.new( id: guru.id, atts: { name: '' } ).exec
       refute( response.ok? )
       assert( response.errors )
     end

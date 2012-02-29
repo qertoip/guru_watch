@@ -15,12 +15,12 @@ class GurusControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'create' do
-    post '/gurus', :guru => Entities::Guru.valid_attributes
+    post '/gurus', guru: Entities::Guru.valid_attributes
     assert_response( 302 )
   end
 
   test 'create invalid' do
-    post '/gurus', :guru => { :name => '' }
+    post '/gurus', guru: { name: '' }
     assert_response( 200 )
     assert_template( :new )
   end
@@ -38,13 +38,13 @@ class GurusControllerTest < ActionDispatch::IntegrationTest
 
   test 'update' do
     guru = Entities::Guru.create_valid!
-    put "/gurus/#{guru.id}", :guru => { :name => 'Updated name' }
+    put "/gurus/#{guru.id}", guru: { name: 'Updated name' }
     assert_response( 302 )
   end
 
   test 'update with invalid attributes' do
     guru = Entities::Guru.create_valid!
-    put "/gurus/#{guru.id}", :guru => { :name => '' }
+    put "/gurus/#{guru.id}", guru: { name: '' }
     assert_response( 200 )
     assert_template( :edit )
   end

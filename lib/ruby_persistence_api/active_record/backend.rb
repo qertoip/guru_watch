@@ -12,7 +12,7 @@ module RubyPersistenceAPI
 
       def transaction
         begin
-          ::ActiveRecord::Base.transaction( :requires_new => true ) do
+          ::ActiveRecord::Base.transaction( requires_new: true ) do
             yield
           end
         rescue Rollback

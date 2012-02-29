@@ -8,7 +8,7 @@ module RubyPersistenceAPI
 
       def save_without_validation
         model = entity_to_model( entity )
-        model.save( :validate => false )
+        model.save( validate: false )
 
         if entity.id.nil?
           entity.id = model.id

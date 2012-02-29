@@ -81,14 +81,14 @@ module RubyPersistenceAPI
 
       def recreate_schema
         c = ::ActiveRecord::Base.connection
-        c.create_table :dogs, :force => true do |t|
+        c.create_table :dogs, force: true do |t|
           t.string :name
           t.integer :age
           t.decimal :price
           t.datetime :bought_at
           t.boolean :active
         end
-        c.create_table :cats, :force => true do |t|
+        c.create_table :cats, force: true do |t|
           t.string :name
           t.integer :age
         end

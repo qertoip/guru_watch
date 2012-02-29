@@ -6,7 +6,7 @@ module UseCases
 
     def exec
       gurus = db[Guru].all
-      Response.new( :gurus => gurus )
+      Response.new( gurus: gurus )
     end
 
   end

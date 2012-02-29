@@ -13,7 +13,7 @@ module RubyPersistenceAPI
     def create_four_animals
       2.times do |i|
         db[Entities::Cat].create!
-        db[Entities::Dog].create!( :name => "Dog #{i}" )
+        db[Entities::Dog].create!( name: "Dog #{i}" )
       end
     end
 

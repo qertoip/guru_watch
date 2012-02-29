@@ -6,7 +6,7 @@ module UseCases
 
     def exec
       guru = db[Guru].find( request.id )
-      Response.new( :guru => guru )
+      Response.new( guru: guru )
     end
 
   end

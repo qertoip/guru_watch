@@ -10,7 +10,7 @@ module Factory
   end
 
   def new_valid( attributes = {} )
-    new( valid_attributes.merge( attributes ), :without_protection => true )
+    new( valid_attributes.merge( attributes ), without_protection: true )
   end
 
 end

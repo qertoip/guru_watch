@@ -1,2 +1,0 @@
-
-ActiveRecord::Backend persists objects in relational database using activerecord gem.

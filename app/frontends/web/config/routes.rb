@@ -1,6 +1,6 @@
 Web::Application.routes.draw do
 
-  root :to => 'pages#index'
+  root to: 'pages#index'
 
   resources :gurus
 

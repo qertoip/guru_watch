@@ -25,7 +25,7 @@ module RubyPersistenceAPI
     class M_where < self
 
       test 'returns query with the where option set' do
-        conditions = { :name => 'Kitty' }
+        conditions = { name: 'Kitty' }
         @query = @query.where( conditions )
         assert_equal( Query, @query.class )
         assert_equal( conditions, @query.options.where )
@@ -36,7 +36,7 @@ module RubyPersistenceAPI
     class M_where_not < self
 
       test 'returns query with the where_not option set' do
-        conditions = { :name => 'Kitty' }
+        conditions = { name: 'Kitty' }
         @query = @query.where_not( conditions )
         assert_equal( Query, @query.class )
         assert_equal( conditions, @query.options.where_not )
@@ -47,7 +47,7 @@ module RubyPersistenceAPI
     class M_order < self
 
       test 'returns query with the order option set' do
-        order = { :name => :asc }
+        order = { name: :asc }
         @query = @query.order( order )
         assert_equal( Query, @query.class )
         assert_equal( order, @query.options.order )

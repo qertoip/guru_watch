@@ -8,7 +8,7 @@ module UseCases
 
     test 'returns a guru for edition' do
       guru = Entities::Guru.create_valid!
-      response = EditGuru.new( :id => guru.id ).exec
+      response = EditGuru.new( id: guru.id ).exec
       assert( response.ok? )
       assert_equal( guru.id, response.guru.id )
     end

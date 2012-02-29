@@ -11,16 +11,16 @@ class GurusController < ApplicationController
   end
 
   def create
-    @rm = CreateGuru.new( :atts => params[:guru] ).exec
+    @rm = CreateGuru.new( atts: params[:guru] ).exec
     @rm.ok? ? redirect_to( gurus_path ) : render( :new )
   end
 
   def edit
-    @rm = EditGuru.new( :id => params[:id] ).exec
+    @rm = EditGuru.new( id: params[:id] ).exec
   end
 
   def update
-    @rm = UpdateGuru.new( :id => params[:id], :atts => params[:guru] ).exec
+    @rm = UpdateGuru.new( id: params[:id], atts: params[:guru] ).exec
     @rm.ok? ? redirect_to( gurus_path ) : render( :edit )
   end
 

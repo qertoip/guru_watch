@@ -13,7 +13,7 @@ module RubyPersistenceAPI
       create_four_animals
 
       # Add the dog we'll be searching for
-      the_right_dog = db[Dog].create!( :name => 'The Right Dog' )
+      the_right_dog = db[Dog].create!( name: 'The Right Dog' )
 
       # Add more noise data
       create_four_animals
@@ -33,7 +33,7 @@ module RubyPersistenceAPI
 
     test 'raises ObjectNotFound exception' do
       assert_raises( RubyPersistenceAPI::ObjectNotFound ) do
-        db[Dog].create!( :name => 'Some dog' )
+        db[Dog].create!( name: 'Some dog' )
         db[Dog].find( 764575723 )
       end
     end

@@ -1,8 +1,8 @@
 - @title = 'New guru'
 
-= form_for( vm.guru, :as => :guru, :url => guru_path( vm.guru ) ) do |f|
+= form_for( vm.guru, as: :guru, url: guru_path( vm.guru ) ) do |f|
 
-  = render 'form', :f => f
+  = render 'form', f: f
 
   .buttons
     = f.submit( 'Create' )

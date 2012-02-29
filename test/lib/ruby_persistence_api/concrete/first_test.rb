@@ -15,8 +15,8 @@ module RubyPersistenceAPI
     end
 
     test 'ensures the returned object is a copy of the persistent one' do
-      dog = Dog.new( :name => 'Doggy' )
-      dog = db[dog].create!( :name => 'Doggy' )
+      dog = Dog.new( name: 'Doggy' )
+      dog = db[dog].create!( name: 'Doggy' )
 
       dog.name[3] = '!'
 

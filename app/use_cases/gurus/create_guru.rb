@@ -6,7 +6,7 @@ module UseCases
 
     def exec
       guru = Guru.new( request.atts )
-      response = Response.new( :guru => guru )
+      response = Response.new( guru: guru )
 
       if guru.valid?
         db[guru].save

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   include UseCases
 
-  rescue_from RubyPersistenceAPI::ObjectNotFound, :with => :show_404
+  rescue_from RubyPersistenceAPI::ObjectNotFound, with: :show_404
 
   ## This abstract factory returns a use case implementation depending
   ## on the ...
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     end
 
     def show_404
-      render( :file => File.join( Rails.root, 'public', '404.html' ), :status => 404 )
+      render( file: File.join( Rails.root, 'public', '404.html' ), status: 404 )
     end
 
 end

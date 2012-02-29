@@ -32,15 +32,15 @@ module RubyPersistenceAPI
         block_executed = false
         begin
           db.transaction do
-            dog = dog_class.new( :name => dog_name )
+            dog = dog_class.new( name: dog_name )
             db[dog].save!
-            assert( db[dog_class].where( :name => dog_name ).first )
+            assert( db[dog_class].where( name: dog_name ).first )
             block_executed = true
             raise exception_class
           end
         rescue exception_class => e
           assert( block_executed, "Block didn't executed: #{e.message}" )
-          assert_nil( db[dog_class].where( :name => dog_name ).first )
+          assert_nil( db[dog_class].where( name: dog_name ).first )
         end
       end
 

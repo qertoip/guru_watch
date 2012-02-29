@@ -9,12 +9,12 @@ module Entities
     class M_initialize < self
 
       class Dog < Entities::Entity
-        attribute :id, :type => Integer
-        attribute :name, :type => String
-        attribute :age, :type => Integer
-        attribute :price, :type => BigDecimal
-        attribute :bought_at, :type => DateTime
-        attribute :active, :type => Boolean
+        attribute :id, type: Integer
+        attribute :name, type: String
+        attribute :age, type: Integer
+        attribute :price, type: BigDecimal
+        attribute :bought_at, type: DateTime
+        attribute :active, type: Boolean
       end
 
       test 'initializes without arguments' do
@@ -26,22 +26,22 @@ module Entities
       end
 
       test 'initializes with a hash' do
-        dog = Dog.new( :name => 'Daisy', :age => 14 )
+        dog = Dog.new( name: 'Daisy', age: 14 )
         assert_equal( dog.age, 14 )
         assert_equal( dog.name, 'Daisy' )
       end
 
       test 'initializes with a hash and options' do
-        Dog.new( { :name => 'Daisy', :age => 14 }, { :without_protection => true } )
+        Dog.new( { name: 'Daisy', age: 14 }, { without_protection: true } )
       end
 
       test 'auto-converts strings to strongly typed values' do
         dog = Dog.new(
-            :name => 'Buldog',
-            :age => '18',
-            :price => '197.98',
-            :bought_at => '2000-03-04 17:35',
-            :active => '1' )
+            name: 'Buldog',
+            age: '18',
+            price: '197.98',
+            bought_at: '2000-03-04 17:35',
+            active: '1' )
         assert_equal( 'Buldog', dog.name )
         assert_equal( 18, dog.age )
         assert_equal( BigDecimal.new( '197.98' ), dog.price )

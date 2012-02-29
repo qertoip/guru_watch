@@ -21,7 +21,7 @@ module RubyPersistenceAPI
 
       def find( id, query = nil )
         query ||= Query.new( self )
-        query.where( :id => id.to_i ).first  ||  raise( ObjectNotFound.new( "#{entity_class.name}/#{id} not found" ) )
+        query.where( id: id.to_i ).first  ||  raise( ObjectNotFound.new( "#{entity_class.name}/#{id} not found" ) )
       end
 
       private

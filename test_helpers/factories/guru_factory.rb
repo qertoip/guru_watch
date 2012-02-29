@@ -8,7 +8,7 @@ module GuruFactory
     random_name = RandomString.generate.camelcase
 
     {
-      :name => "#{random_name}"
+      name: "#{random_name}"
     }
   end
 
