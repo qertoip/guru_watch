@@ -7,49 +7,155 @@ as explained by Robert C. Martin in his famous keynote
 The ambitious goal of the project is to gain benefits of framework isolation and use case approach
 __without sacrificing what we all love in Ruby on Rails__.
 
+## Big picture
+
+                                                        |
+                    Frontends                           | frameworks allowed (i.e. ActionPack, LimeLight GUI, Trolltop CLI)
+                                                        |
+     ----------------------------------------
+                                                        |
+          -------------      ------------               |
+          | Use Cases |----->| Entities |               | frameworks outlawed
+          -------------      ------------               |
+                                                        |
+     ----------------------------------------
+                                                        |
+                    Backends                            | frameworks allowed (i.e. ActiveRecord, DataMapper, redis-rb)
+                                                        |
+
 ## The story
 
  * Architecture is not about frameworks and tools
  * Architecture is about __use cases__
- * Architecture should be isolated from frameworks
- * Architecture should be isolated from a frontend (delivery mechanism)
- * Architecture should be isolated from a backend (persistence mechanism)
+ * Business logic should be isolated from frameworks
+ * Business logic should be isolated from the frontend (delivery mechanism)
+ * Business logic should be isolated from the backend (persistence mechanism)
 
-That is, while frameworks, frontend, and backend are obviously necessary,
-architecture should be isolated from them.
+That is, think in use cases, not in frameworks. Use frameworks but isolate from them.
 
-## Real world benefits
+## Real World Benefits
 
-* solves models obesity problem
-    * there is now obvious place to put (hundreds?!) of your User model methods:
-        * the User use cases
-* much faster functional and unit tests
-    * isolation from ActiveRecord allows you to plug memory-based persistence backend
-    * enjoy true TDD without hacky workarounds
-* easier to upgrade frameworks
-    * ActiveRecord 3.2 has different API than ActiveRecord 2.3
-    * thanks to isolation you have to change code only in one place - the adapter
-* easier to remove frameworks
-    * remember searchlogic?
-        * [Lament 1] (https://github.com/binarylogic/searchlogic/issues/155)
-        "Please help me in searchlogic for rails 3.1.1. my whole application using searchlogic. I dont know what i do now its not working with Rails 3.1.1. can you people help us its work for rails 3.1.1 and above..."
-        * [Lament 2] (https://github.com/binarylogic/searchlogic/issues/153)
-        "when rails 3.1 compatibility?!"
-* easier to plug frontends other than DHTML, i.e.:
-      * functional tests
-      * rake tasks
-      * API (services)
-      * CLI (command line interface)
-      * GUI (fat)
-      * Voice UI?
-      * Thoughts UI?
-* easier to migrate to the other relational database
-      * MySQL <-> PostgreSQL <-> Oracle
-* easier to migrate to a completely different database paradigm
-      * Relational <-> Document-oriented <-> Object-oriented <-> Flat-files <-> ActiveResource? <-> ruby-git?? <-> and what not
-* easier to swap MVC framework
-      * since controllers are thinner than ever and use cases are encapsulated in, well, UseCases, it's easier to swap between MVC frameworks like ActionPack and Sinatra
+Don't miss the [real world benefits](https://github.com/qertoip/guru_watch/wiki/Real-World-Benefits) of this approach.
 
+## Real World Concerns
+
+Here I'll try to address [the concerns](https://github.com/qertoip/guru_watch/wiki/Real-World-Concerns) the proposed approach may raise.
+
+## Example application
+
+Guru Watch is a toy application which aims to put the theory into practice.
+
+### Theme (what is this toy app about?)
+
+> There are exceptional individuals who create exceptionally worthwile content.
+> In such rare cases you do not want to miss any piece of wisdom they share.
+> This app is dedicated to track and link whatever your gurus create.
+>
+> You choose your own Gurus (add, list, remove, etc). You link their Content. The benefit over using a notepad is that
+> community will help you watch your guru by adding new resources you may have missed.
+
+
+### Use Cases
+
+#### Theory
+
+Use cases encapsulate application-specific logic. Single use case represents a meaningful action user can take in the system.
+
+Use cases have nothing to do with the web. They are frontend agnostic.
+
+#### Implementation
+
+The use case is a PORO object derived from the __UseCase base class__. It has the #exec method.
+
+The __Request__ represents input data of the use case. It's just an OpenStruct.
+
+The __Response__ represents output data of the use case. It's also an OpenStruct.
+
+The actual use cases live in __app/use\_cases/__
+
+The base classes (UseCase, Request, Response) seem to be reusable across apps so I put them in the lib/use_case_api/ for now.
+
+### Entities
+
+#### Theory
+
+Entities are business objects. They encapsulate business logic known to be reusable across all apps in the enterprise.
+In practice I expect this "reusable business logic" to be mostly attributes and validations, not much more. Time will show.
+
+Entities may or may not be persistent. Use them liberally to model your domain in an object-oriented fashion.
+
+Entities __do not__ manage their persistence. In particular, they __do not__ derive from ActiveRecord::Base.
+
+#### Implementation
+
+The entity is a PORO object derived from the __Entity base class__.
+
+The __Entity base class__ tries to give you convenience known from ActiveRecord models, like validations, mass assignment,
+auto type casting and more. It does so by including ActiveModel and ActiveAttr modules.
+
+The actual entities live in __app/entities/__
+
+The base class seem to be reusable across apps so I put it in the lib/entities_api/ for now.
+
+### Backends (persistence mechanisms)
+
+#### Theory
+
+Entity gateways implement persistence.
+
+Use cases call entity gateways to persist and retrive objects.
+
+You can think of entity gateways as adapters between what use cases need and what your persistence library (say ActiveRecord) has to offer.
+
+Typically there is one gateway per entity per persistence mechanism. Don't be scared though. I'll show you how to use convention-over-configuration to avoid writing them, most of the time.
+
+The backend groups all entity gateways for the particular persistence mechanism.
+
+Use cases __do not__ hardcode a particular backend. Instead, backends are plugins.
+
+#### Implementation
+
+You certainly __do not__ want to sink in a mass of boilerplate code you never had to write before.
+
+My present view is that we need a generic persistence API to be used in use cases.
+This API should imply neither persistence framework nor database paradigm.
+It could be similar to AREL minus the strictly-relational parts.
+I called that "Ruby Persistence API". Remember, this is just an API, not the implementation.
+
+Now, I work on the two implementations of this API:
+
+ * RubyPersistenceAPI::ActiveRecord - adapter to ActiveRecord
+ * RubyPersistenceAPI::ActiveMemory - in-memory ActiveRecord-like store for ultra fast tests
+
+I started documenting [Ruby Persistence API here](https://github.com/qertoip/guru_watch/wiki/Ruby-Persistence-API).
+
+Bear in mind the work has just began - it is nowhere near general usefulness.
+
+(TBC)
+
+### Frontends (delivery mechanisms)
+
+#### Theory
+
+Frontend translates user actions (i.e. HTTP request, keystrokes, mouse clicks, etc.) into the frontend-agnostict request.
+
+Frontend calls the related use case passing it the request.
+
+Fronted receives the response which can be used to deliver feedback to the user (i.e. show nice validation errors).
+
+#### Implementation
+
+Stock ActionPack.
+
+## Stage of development
+
+This is very early stage. You can barely create, list and edit your Gurus.
+
+However:
+
+ * the architecture is already clearly visible
+ * the whole app is runnable
+ * you can learn how to tear Rails apart and tie all those things together "the right way"
 
 ## Running the application
 
@@ -63,7 +169,7 @@ At this early stage there is only one controller allowing you to manage your gur
 
     bundle exec rake test
 
-## Choosen architectural issues in the current implementation
+### Choosen architectural issues in the current implementation
 
  * Controllers depend on concrete use cases instead of use case interfaces.
    This prevents controllers from being tested in isolation from the application.
@@ -77,7 +183,7 @@ At this early stage there is only one controller allowing you to manage your gur
  * Entities leak into the controller and views.
    ResponseModel references them, pretending they are data structures.
 
-## Choosen todos
+### Choosen todos
 
  * Implement active record backend.
  * Make log/test.log work.
