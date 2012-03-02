@@ -9,19 +9,19 @@ __without sacrificing what we all love in Ruby on Rails__.
 
 ## Big picture
 
-                                                        |
-                    Frontends                           | frameworks allowed (i.e. ActionPack, LimeLight GUI, Trolltop CLI)
-                                                        |
+                                                   |
+                    Frontends                      | frameworks allowed (i.e. ActionPack, LimeLight GUI, Trolltop CLI)
+                                                   |
      ----------------------------------------
-                                                        |
-          -------------      ------------               |
-          | Use Cases |----->| Entities |               | frameworks outlawed
-          -------------      ------------               |
-                                                        |
+                                                   |
+          -------------      ------------          |
+          | Use Cases |----->| Entities |          | frameworks outlawed
+          -------------      ------------          |
+                                                   |
      ----------------------------------------
-                                                        |
-                    Backends                            | frameworks allowed (i.e. ActiveRecord, DataMapper, redis-rb)
-                                                        |
+                                                   |
+                    Backends                       | frameworks allowed (i.e. ActiveRecord, DataMapper, redis-rb)
+                                                   |
 
 ## The story
 
@@ -59,7 +59,7 @@ Guru Watch is a toy application which aims to put the theory into practice.
 
 #### Theory
 
-Use cases encapsulate application-specific logic. Single use case represents a meaningful action user can take in the system.
+Use cases encapsulate application-specific logic. Single use case represents a single meaningful action user can take in the system.
 
 Use cases have nothing to do with the web. They are frontend agnostic.
 
@@ -71,7 +71,7 @@ The __Request__ represents input data of the use case. It's just an OpenStruct.
 
 The __Response__ represents output data of the use case. It's also an OpenStruct.
 
-The actual use cases live in __app/use\_cases/__
+Use cases live in __app/use\_cases/__
 
 The base classes (UseCase, Request, Response) seem to be reusable across apps so I put them in the lib/use_case_api/ for now.
 
@@ -93,9 +93,9 @@ The entity is a PORO object derived from the __Entity base class__.
 The __Entity base class__ tries to give you convenience known from ActiveRecord models, like validations, mass assignment,
 auto type casting and more. It does so by including ActiveModel and ActiveAttr modules.
 
-The actual entities live in __app/entities/__
+Entities live in __app/entities/__
 
-The base class seem to be reusable across apps so I put it in the lib/entities_api/ for now.
+The __Entity base class__ seem to be reusable across apps so I put it in the lib/entities_api/ for now.
 
 ### Backends (persistence mechanisms)
 
