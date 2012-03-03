@@ -8,22 +8,39 @@ module RubyPersistenceAPI
 
     include Entities
 
-    class CalledOnNewObject < self
+    class FoNewObject < self
       test 'marks object as destroyed' do
+        cat = Cat.new
+        db[cat].destroy
+        assert( cat.destroyed? )
       end
 
       test 'freezes the object' do
+        cat = Cat.new
+        db[cat].destroy
+        assert( cat.frozen? )
       end
     end
 
-    class CalledOnSavedObject < self
+    class ForPersistentObject < self
       test 'removes the object from persistent store' do
+        cat = db[Cat].create!
+        db[cat].destroy
+        assert_raises( RubyPersistenceAPI::ObjectNotFound ) do
+          db[Cat].find( cat.id )
+        end
       end
 
       test 'marks object as destroyed' do
+        cat = db[Cat].create!
+        db[cat].destroy
+        assert( cat.destroyed? )
       end
 
       test 'freezes the object' do
+        cat = db[Cat].create!
+        db[cat].destroy
+        assert( cat.frozen? )
       end
     end
 

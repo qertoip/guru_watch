@@ -4,6 +4,7 @@ require_relative 'modules/create_gateway'
 require_relative 'modules/retrieve_gateway'
 require_relative 'modules/save_gateway'
 require_relative 'modules/update_attributes_gateway'
+require_relative 'modules/destroy_gateway'
 
 module RubyPersistenceAPI
 
@@ -15,6 +16,7 @@ module RubyPersistenceAPI
       include RetrieveGateway
       include SaveGateway
       include UpdateAttributesGateway
+      include DestroyGateway
 
       protected
 
