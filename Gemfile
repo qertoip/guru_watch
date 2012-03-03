@@ -6,8 +6,8 @@ gem 'rake', require: false
 # Application
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-gem 'activemodel', require: 'active_model'
-gem 'activesupport', require: 'active_support/all'
+gem 'activemodel', '3.2.2', require: 'active_model'
+gem 'activesupport', '3.2.2', require: 'active_support/all'
 gem 'active_attr', git: 'https://github.com/cgriego/active_attr.git'
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -28,7 +28,7 @@ end
 
 group :web_frontend do
   gem 'unicorn'
-  gem 'rails', '3.2.1' #, require: false
+  gem 'rails', '3.2.2' #, require: false
   gem 'haml'
 end
 
