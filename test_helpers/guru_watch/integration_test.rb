@@ -2,7 +2,7 @@
 
 module GuruWatch
 
-  class TestCase < ActiveSupport::TestCase
+  class IntegrationTest < ActionDispatch::IntegrationTest
 
     def db
       Application.instance.config.backend
