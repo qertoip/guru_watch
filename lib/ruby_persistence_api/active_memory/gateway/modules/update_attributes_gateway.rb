@@ -6,13 +6,13 @@ module RubyPersistenceAPI
 
     module UpdateAttributesGateway
 
-      def update_attributes( attributes )
-        self.entity.assign_attributes( attributes )
+      def update_attributes(attributes)
+        self.entity.assign_attributes(attributes)
         save
       end
 
-      def update_attributes!( attributes )
-        self.entity.assign_attributes( attributes )
+      def update_attributes!(attributes)
+        self.entity.assign_attributes(attributes)
         save!
       end
 

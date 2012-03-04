@@ -8,18 +8,20 @@ module RubyPersistenceAPI
 
       attr_accessor :backend, :entity
 
-      def initialize( backend, entity = nil )
+      def initialize(backend, entity = nil)
         self.backend = backend
         self.entity = entity
       end
 
       protected
 
-        class << self; attr_accessor :entity_klass end
+      class << self;
+        attr_accessor :entity_klass
+      end
 
-        def self.entity_class( entity_klass )
-          self.entity_klass = entity_klass
-        end
+      def self.entity_class(entity_klass)
+        self.entity_klass = entity_klass
+      end
 
     end
 

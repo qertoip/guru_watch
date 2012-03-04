@@ -12,13 +12,13 @@ module RubyPersistenceAPI
       test 'marks object as destroyed' do
         cat = Cat.new
         db[cat].destroy
-        assert( cat.destroyed? )
+        assert(cat.destroyed?)
       end
 
       test 'freezes the object' do
         cat = Cat.new
         db[cat].destroy
-        assert( cat.frozen? )
+        assert(cat.frozen?)
       end
     end
 
@@ -26,21 +26,21 @@ module RubyPersistenceAPI
       test 'removes the object from persistent store' do
         cat = db[Cat].create!
         db[cat].destroy
-        assert_raises( RubyPersistenceAPI::ObjectNotFound ) do
-          db[Cat].find( cat.id )
+        assert_raises(RubyPersistenceAPI::ObjectNotFound) do
+          db[Cat].find(cat.id)
         end
       end
 
       test 'marks object as destroyed' do
         cat = db[Cat].create!
         db[cat].destroy
-        assert( cat.destroyed? )
+        assert(cat.destroyed?)
       end
 
       test 'freezes the object' do
         cat = db[Cat].create!
         db[cat].destroy
-        assert( cat.frozen? )
+        assert(cat.frozen?)
       end
     end
 

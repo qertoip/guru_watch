@@ -8,7 +8,7 @@ module UseCases
 
     test 'returns a new Guru with a default values' do
       response = NewGuru.new.exec
-      assert( response.guru )
+      assert(response.guru)
     end
 
   end

@@ -12,7 +12,7 @@ module RubyPersistenceAPI
       end
 
       def new_record?
-        id.nil?  # TODO: this assumes only db manages ids
+        id.nil? # TODO: this assumes only db manages ids
       end
 
       def destroyed?

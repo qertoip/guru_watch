@@ -6,14 +6,14 @@ module RubyPersistenceAPI
 
     module CreateGateway
 
-      def create( attributes = {} )
-        self.entity = entity_class.new( attributes )
+      def create(attributes = { })
+        self.entity = entity_class.new(attributes)
         save
         entity
       end
 
-      def create!( attributes = {} )
-        self.entity = entity_class.new( attributes )
+      def create!(attributes = { })
+        self.entity = entity_class.new(attributes)
         save!
         entity
       end

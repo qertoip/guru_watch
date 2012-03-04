@@ -2,4 +2,4 @@
 
 require 'entities_api/abstract/entity'
 
-require_siblings( __FILE__ )
+require_siblings(__FILE__)

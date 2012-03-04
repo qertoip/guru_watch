@@ -9,7 +9,7 @@ module RubyPersistenceAPI
       attr_accessor :root, :transactions
 
       def initialize
-        self.root = {}
+        self.root = { }
         self.transactions = []
       end
 
@@ -31,17 +31,17 @@ module RubyPersistenceAPI
 
       private
 
-        def deep_copy( object )
-          Marshal.load( Marshal.dump( object ) )
-        end
+      def deep_copy(object)
+        Marshal.load(Marshal.dump(object))
+      end
 
-        def begin_transaction
-          transactions << deep_copy( root )
-        end
+      def begin_transaction
+        transactions << deep_copy(root)
+      end
 
-        def rollback_transaction
-          self.root = transactions.pop
-        end
+      def rollback_transaction
+        self.root = transactions.pop
+      end
 
     end
 

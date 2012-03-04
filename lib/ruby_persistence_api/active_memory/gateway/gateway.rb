@@ -20,26 +20,26 @@ module RubyPersistenceAPI
 
       protected
 
-        def entity_class
-          self.class.entity_klass
-        end
+      def entity_class
+        self.class.entity_klass
+      end
 
-        def root
-          backend.root
-        end
+      def root
+        backend.root
+      end
 
-        def deep_copy( object )
-          Marshal.load( Marshal.dump( object ) )
-        end
+      def deep_copy(object)
+        Marshal.load(Marshal.dump(object))
+      end
 
-        def entity_to_hash( entity )
-          deep_copy( entity.attributes )
-        end
+      def entity_to_hash(entity)
+        deep_copy(entity.attributes)
+      end
 
-        def hashes_to_entities( hashes )
-          entity_class = self.class.entity_klass
-          deep_copy( hashes ).map { |h| entity_class.new( h ) }
-        end
+      def hashes_to_entities(hashes)
+        entity_class = self.class.entity_klass
+        deep_copy(hashes).map { |h| entity_class.new(h) }
+      end
 
     end
 

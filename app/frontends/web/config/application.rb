@@ -1,5 +1,5 @@
 # Load the application
-require File.expand_path('../../../../application',  __FILE__)
+require File.expand_path('../../../../application', __FILE__)
 
 ENV['RAILS_ENV'] = ENV['APP_ENV']
 
@@ -9,7 +9,7 @@ require "action_mailer/railtie"
 # If you precompile assets before deploying to production, use this line
 # Bundler.require(*Rails.groups(assets: %w(development test)))
 # If you want your assets lazily compiled in production, use this line
-Bundler.require( :web_frontend )  # , "web_frontend_#{ENV['APP_ENV']}"
+Bundler.require(:web_frontend) # , "web_frontend_#{ENV['APP_ENV']}"
 
 module Web
   class Application < Rails::Application

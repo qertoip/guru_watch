@@ -6,29 +6,48 @@ module RubyPersistenceAPI
 
   class QueryTest < RubyPersistenceAPI::TestCase
 
-    class Entity; include ActiveAttr::Model end
-    class Dog < Entity; attr_accessor :id, :name; end
-    class ConcreteBackend < Abstract::Backend; end
-    class ConcreteGateway < Abstract::Gateway
-      def first( query ) end
-      def all( query ) end
-      def find( query, id ) end
-      def create( attributes = {} ) end
-      def create!( attributes = {} ) end
+    class Entity;
+      include ActiveAttr::Model
     end
-    class DogGateway < ConcreteGateway; end
+
+    class Dog < Entity;
+      attr_accessor :id, :name;
+    end
+
+    class ConcreteBackend < Abstract::Backend;
+    end
+
+    class ConcreteGateway < Abstract::Gateway
+      def first(query)
+      end
+
+      def all(query)
+      end
+
+      def find(query, id)
+      end
+
+      def create(attributes = { })
+      end
+
+      def create!(attributes = { })
+      end
+    end
+
+    class DogGateway < ConcreteGateway;
+    end
 
     def setup
-      @query = Query.new( DogGateway.new( ConcreteBackend.new ) )
+      @query = Query.new(DogGateway.new(ConcreteBackend.new))
     end
 
     class M_where < self
 
       test 'returns query with the where option set' do
         conditions = { name: 'Kitty' }
-        @query = @query.where( conditions )
-        assert_equal( Query, @query.class )
-        assert_equal( conditions, @query.options.where )
+        @query = @query.where(conditions)
+        assert_equal(Query, @query.class)
+        assert_equal(conditions, @query.options.where)
       end
 
     end
@@ -37,9 +56,9 @@ module RubyPersistenceAPI
 
       test 'returns query with the where_not option set' do
         conditions = { name: 'Kitty' }
-        @query = @query.where_not( conditions )
-        assert_equal( Query, @query.class )
-        assert_equal( conditions, @query.options.where_not )
+        @query = @query.where_not(conditions)
+        assert_equal(Query, @query.class)
+        assert_equal(conditions, @query.options.where_not)
       end
 
     end
@@ -48,9 +67,9 @@ module RubyPersistenceAPI
 
       test 'returns query with the order option set' do
         order = { name: :asc }
-        @query = @query.order( order )
-        assert_equal( Query, @query.class )
-        assert_equal( order, @query.options.order )
+        @query = @query.order(order)
+        assert_equal(Query, @query.class)
+        assert_equal(order, @query.options.order)
       end
 
     end
@@ -74,7 +93,7 @@ module RubyPersistenceAPI
     class M_find < self
 
       test 'calls gateway.find passing it self and id' do
-        @query.find( 1 )
+        @query.find(1)
       end
 
     end

@@ -13,7 +13,7 @@ module RubyPersistenceAPI
 
     attr_accessor :gateway, :options
 
-    def initialize( gateway )
+    def initialize(gateway)
       self.gateway = gateway
       self.options = QueryOptions.new
     end

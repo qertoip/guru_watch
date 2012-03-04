@@ -9,9 +9,9 @@ module UseCases
     class M_initilize < self
 
       test 'initializes with a Hash' do
-        response = Response.new( xxx: 2, s: 'New frontiers' )
-        assert_equal( 2, response.xxx )
-        assert_equal( 'New frontiers', response.s )
+        response = Response.new(xxx: 2, s: 'New frontiers')
+        assert_equal(2, response.xxx)
+        assert_equal('New frontiers', response.s)
       end
 
     end
@@ -20,13 +20,13 @@ module UseCases
     class M_ok < self
 
       test 'returns true if there are no errors' do
-        response = Response.new( something: 'whatever' )
-        assert( response.ok? )
+        response = Response.new(something: 'whatever')
+        assert(response.ok?)
       end
 
       test 'returns false if there are errors' do
-        response = Response.new( something: 'whatever', errors: 'some errors' )
-        refute( response.ok? )
+        response = Response.new(something: 'whatever', errors: 'some errors')
+        refute(response.ok?)
       end
 
     end

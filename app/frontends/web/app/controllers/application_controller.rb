@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def show_404
-      render( file: File.join( Rails.root, 'public', '404' ), status: 404, :format => :html )
-    end
+  def show_404
+    render(file: File.join(Rails.root, 'public', '404'), status: 404, :format => :html)
+  end
 
 end

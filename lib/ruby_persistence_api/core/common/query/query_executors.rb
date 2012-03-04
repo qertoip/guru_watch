@@ -5,23 +5,23 @@ module RubyPersistenceAPI
   module QueryExecutors
 
     def first
-      gateway.first( self )
+      gateway.first(self)
     end
 
     def all
-      gateway.all( self )
+      gateway.all(self)
     end
 
-    def find( id )
-      gateway.find( id, self )
+    def find(id)
+      gateway.find(id, self)
     end
 
-    def create( attributes = {} )
-      gateway.create( attributes )
+    def create(attributes = { })
+      gateway.create(attributes)
     end
 
-    def create!( attributes = {} )
-      gateway.create!( attributes )
+    def create!(attributes = { })
+      gateway.create!(attributes)
     end
 
   end

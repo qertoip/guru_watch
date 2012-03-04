@@ -5,7 +5,7 @@ module UseCases
   class NewGuru < UseCase
 
     def exec
-      Response.new( guru: Guru.new )
+      Response.new(guru: Guru.new)
     end
 
   end

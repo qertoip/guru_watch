@@ -2,7 +2,7 @@
 
 ENV['APP_ENV'] = 'test'
 
-require_relative( '../app/application' )
+require_relative('../app/application')
 
 require 'minitest/autorun'
 

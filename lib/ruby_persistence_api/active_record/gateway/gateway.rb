@@ -18,21 +18,21 @@ module RubyPersistenceAPI
 
       protected
 
-        def entity_class
-          self.class.entity_klass
-        end
+      def entity_class
+        self.class.entity_klass
+      end
 
-        def entity_to_model( entity )
-          model_class.new( entity.attributes )
-        end
+      def entity_to_model(entity)
+        model_class.new(entity.attributes)
+      end
 
-        def model_to_entity( model )
-          entity_class.new( model.attributes )
-        end
+      def model_to_entity(model)
+        entity_class.new(model.attributes)
+      end
 
-        def models_to_entities( models )
-          models.map{ |model| model_to_entity( model ) }
-        end
+      def models_to_entities(models)
+        models.map { |model| model_to_entity(model) }
+      end
 
     end
 

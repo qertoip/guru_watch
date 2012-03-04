@@ -8,10 +8,10 @@ module GuruFactory
     random_name = RandomString.generate.camelcase
 
     {
-      name: "#{random_name}"
+        name: "#{random_name}"
     }
   end
 
 end
 
-Entities::Guru.extend( GuruFactory )
+Entities::Guru.extend(GuruFactory)

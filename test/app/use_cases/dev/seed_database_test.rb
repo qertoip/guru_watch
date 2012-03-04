@@ -8,7 +8,7 @@ module UseCases
 
     it 'creates example gurus' do
       response = SeedDatabase.new.exec
-      assert( response.ok? )
+      assert(response.ok?)
     end
 
   end

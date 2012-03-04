@@ -8,9 +8,9 @@ module UseCases
 
     attr_accessor :request
 
-    def initialize( request_or_hash = {} )
-      if request_or_hash.is_a?( Hash )
-        self.request = Request.new( request_or_hash )
+    def initialize(request_or_hash = { })
+      if request_or_hash.is_a?(Hash)
+        self.request = Request.new(request_or_hash)
       else
         self.request = request_or_hash
       end
@@ -18,9 +18,9 @@ module UseCases
 
     private
 
-      def db
-        Application.instance.config.backend
-      end
+    def db
+      Application.instance.config.backend
+    end
 
   end
 

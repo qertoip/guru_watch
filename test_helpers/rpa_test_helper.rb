@@ -2,7 +2,7 @@
 
 ENV['BACKEND'] = 'active_memory' unless ENV['BACKEND']
 
-require_relative( '../test/lib/ruby_persistence_api/concrete/app/application' )
+require_relative('../test/lib/ruby_persistence_api/concrete/app/application')
 
 require 'minitest/autorun'
 

@@ -12,8 +12,8 @@ module UseCases
       Guru.create_valid!
       Guru.create_valid!
       response = ListGurus.new.exec
-      assert( response.ok? )
-      assert_equal( 2, response.gurus.size )
+      assert(response.ok?)
+      assert_equal(2, response.gurus.size)
     end
 
   end
