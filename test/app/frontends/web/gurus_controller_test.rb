@@ -25,6 +25,13 @@ class GurusControllerTest < GuruWatch::IntegrationTest
     assert_template(:new)
   end
 
+  test 'show' do
+    guru = Entities::Guru.create_valid!
+    get "gurus/#{guru.id}"
+    assert_response(200)
+    assert_template(:show)
+  end
+
   test 'edit' do
     guru = Entities::Guru.create_valid!
     get "/gurus/#{guru.id}/edit"
@@ -47,6 +54,12 @@ class GurusControllerTest < GuruWatch::IntegrationTest
     put "/gurus/#{guru.id}", guru: { name: '' }
     assert_response(200)
     assert_template(:edit)
+  end
+
+  test 'destroy' do
+    guru = Entities::Guru.create_valid!
+    delete "/gurus/#{guru.id}"
+    assert_response(302)
   end
 
 end
