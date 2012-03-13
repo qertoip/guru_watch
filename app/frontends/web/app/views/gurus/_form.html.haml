@@ -1,15 +1,7 @@
-.row
-  %p
-    = f.label :name, 'Name'
-  %p
-    = f.text_field :name
-.row
-  %p
-    = f.label :homepage, 'Official site'
-  %p
-    = f.text_field :homepage
-.row
-  %p
-    = f.label :description, 'Description'
-  %p
-    ~ f.text_area :description
+
+= f.label :name, 'Name'
+= f.text_field :name, class: 'span5'
+= f.label :homepage, 'Official site'
+= f.text_field :homepage, class: 'span5'
+= f.label :description, 'Description'
+~ f.text_area :description, class: 'span5'

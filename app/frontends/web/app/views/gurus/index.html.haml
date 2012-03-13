@@ -2,15 +2,16 @@
 
 .gurus
   - vm.gurus.each do |guru|
-    .guru
-      .name
-        = guru.name
-      .homepage
-        = guru.homepage
-      .description
+    .guru.row{ style: 'padding-top: 8px; padding-bottom: 8px;' }
+      .name.span4
+        %h4
+          = guru.name
+        = link_to( guru.homepage, guru.homepage )
+      .description.span6
         = guru.description
-      .options
+      .options.span2
         = link_to( "edit", edit_guru_path( guru ) )
+        = link_to( "delete", guru_path( guru ), :method => :delete )
 
-.options
-  = link_to( "New guru", new_guru_path )
+.options{ style: 'margin-top: 16px;' }
+  = link_to( "New guru", new_guru_path, class: 'btn' )

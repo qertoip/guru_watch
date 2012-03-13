@@ -9,9 +9,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<h1><%= @title %></h1>
+  <div class="container">
+    <div class='row'>
+      <div class='span12'>
+        <h1><%= @title %></h1>
 
-<%= yield %>
-
+        <%= yield %>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

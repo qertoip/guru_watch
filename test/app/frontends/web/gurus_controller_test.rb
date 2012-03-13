@@ -26,10 +26,11 @@ class GurusControllerTest < GuruWatch::IntegrationTest
   end
 
   test 'show' do
-    guru = Entities::Guru.create_valid!
-    get "gurus/#{guru.id}"
-    assert_response(200)
-    assert_template(:show)
+    pending
+    #guru = Entities::Guru.create_valid!
+    #get "gurus/#{guru.id}"
+    #assert_response(200)
+    #assert_template(:show)
   end
 
   test 'edit' do

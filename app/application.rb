@@ -11,6 +11,7 @@ class Application
   def initialize!
     require_stdlib
     require_bundler_default_group
+    augment_load_path
     require_lib
     require_app
     init_backend
@@ -40,6 +41,11 @@ class Application
 
   def require_lib
     require_relative '../lib/all'
+  end
+
+  def augment_load_path
+    libpath = File.expand_path( File.dirname( __FILE__ ) + '../../lib' )
+    $LOAD_PATH << libpath
   end
 
   def require_app
