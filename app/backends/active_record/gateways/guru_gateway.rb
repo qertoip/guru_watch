@@ -7,7 +7,8 @@ module Backends
     class GuruGateway < RubyPersistenceAPI::ActiveRecord::Gateway
 
       entity_class Entities::Guru
-      class Guru < ::ActiveRecord::Base;
+
+      class Guru < ::ActiveRecord::Base
       end
 
       def model_class

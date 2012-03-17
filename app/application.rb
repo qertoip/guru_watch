@@ -49,25 +49,20 @@ class Application
   end
 
   def require_app
-    # require_relative 'backends/api/all'
     require_relative 'entities/all'
     require_relative 'use_cases/all'
   end
 
   def init_active_memory_backend
-    Bundler.require(:active_memory_backend)
-    require_relative '../lib/ruby_persistence_api/active_memory/all'
     require_relative 'backends/active_memory/all'
     config.backend = RubyPersistenceAPI::ActiveMemory::Backend.new
     config.backend.connect!
   end
 
   def init_active_record_backend
-    Bundler.require(:active_record_backend)
-    require_relative '../lib/ruby_persistence_api/active_record/all'
     require_relative 'backends/active_record/all'
     config.backend = RubyPersistenceAPI::ActiveRecord::Backend.new
-    active_record_config = Backends::ActiveRecord::Config.load( env )
+    active_record_config = Backends::ActiveRecord::Config.load(env)
     config.backend.connect!(active_record_config)
   end
 

@@ -1,5 +1,4 @@
 # -*- coding: UTF-8 -*-
 
-require 'entities_api/abstract/entity'
-
-require_siblings(__FILE__)
+require_relative '../../lib/entities_api/abstract/entity'
+require_relative 'guru'

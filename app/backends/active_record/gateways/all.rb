@@ -1,1 +1,1 @@
-require_siblings(__FILE__)
+require_relative 'guru_gateway'

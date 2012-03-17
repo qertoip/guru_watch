@@ -1,7 +1,7 @@
 
-desc 'Create active_record database for the specified environment'
 namespace :ar do
   namespace :db do
+    desc 'Create active_record database for the specified environment'
     task :create, [:env] do |t, args|
       args.with_defaults(:env => 'development')
 

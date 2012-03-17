@@ -1,7 +1,7 @@
 
-desc 'Destroy active_record database for the specified environment'
 namespace :ar do
   namespace :db do
+    desc 'Destroy active_record database for the specified environment'
     task :destroy, [:env] do |t, args|
       args.with_defaults(:env => 'development')
 

@@ -15,6 +15,10 @@ module Backends
         config_hash
       end
 
+      def self.migrations_paths
+        ["#{File.expand_path(File.dirname( __FILE__ ) + '/../migrations')}"]
+      end
+
     end
 
   end
