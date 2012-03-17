@@ -50,3 +50,5 @@ group :test do
   gem 'minitest-reporters', require: false
   gem 'mocha', require: false
 end
+
+gem 'pry'

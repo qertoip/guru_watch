@@ -10,7 +10,7 @@ module Backends
       class Guru < ::ActiveRecord::Base;
       end
 
-      def model_class;
+      def model_class
         Guru
       end
 

@@ -6,15 +6,25 @@ module RubyPersistenceAPI
 
     class Backend < Abstract::Backend
 
-      attr_accessor :root, :transactions
+      attr_accessor :databases, :transactions
 
       def initialize
-        self.root = { }
+        self.databases = { 'default' => {} }
         self.transactions = []
       end
 
-      def connect!
-        # Do nothing as this is a memory backend
+      def connect!(config = {})
+        @current_database = config[:database] || 'default'
+      end
+
+      def create_database(config)
+        database = config[:database] || (raise ':database key missing')
+        databases[database] = {}
+      end
+
+      def destroy_database(config)
+        database = config[:database] || (raise ':database key missing')
+        databases.remove(database)
       end
 
       def transaction
@@ -27,6 +37,14 @@ module RubyPersistenceAPI
           rollback_transaction
           raise
         end
+      end
+
+      def root
+        databases[@current_database]
+      end
+
+      def root=(new_root)
+        databases[@current_database] = new_root
       end
 
       private

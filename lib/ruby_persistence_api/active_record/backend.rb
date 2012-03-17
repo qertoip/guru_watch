@@ -10,6 +10,14 @@ module RubyPersistenceAPI
         ::ActiveRecord::Base.establish_connection(config)
       end
 
+      def create_database(config)
+        DatabaseCreator.new(config).create_database
+      end
+
+      def destroy_database(config)
+        DatabaseDestroyer.new(config).destroy_database
+      end
+
       def transaction
         begin
           ::ActiveRecord::Base.transaction(requires_new: true) do

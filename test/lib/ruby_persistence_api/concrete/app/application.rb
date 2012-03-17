@@ -46,6 +46,7 @@ module RubyPersistenceAPI
       require_relative '../../../../../lib/ruby_persistence_api/active_memory/all'
       require_relative 'backends/active_memory/all'
       config.backend = RubyPersistenceAPI::ActiveMemory::Backend.new
+      config.backend.connect!
     end
 
     def init_active_record_backend

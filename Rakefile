@@ -38,3 +38,7 @@ task 'test:app' => ['test:entities', 'test:use_cases', 'test:frontends', 'test:b
 task test: ['test:lib', 'test:app']
 
 task default: :test
+
+FileList['**/*.rake'].each do |task_file|
+  load( File.expand_path( task_file ) )
+end
