@@ -1,0 +1,15 @@
+- @title = vm.guru.name
+
+.guru.row
+  .name.span4
+    %h4
+      = vm.guru.name
+    = link_to( vm.guru.homepage, vm.guru.homepage )
+  .description.span6
+    = vm.guru.description
+  .options.span2
+    = link_to( "edit", edit_guru_path( vm.guru ) )
+    = link_to( "delete", guru_path( vm.guru ), :method => :delete )
+
+.options{ style: 'margin-top: 16px;' }
+  = link_to( "Back to guru list", gurus_path, class: 'btn' )

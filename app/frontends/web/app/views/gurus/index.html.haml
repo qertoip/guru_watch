@@ -10,6 +10,7 @@
       .description.span6
         = guru.description
       .options.span2
+        = link_to( "show", guru_path( guru ) )
         = link_to( "edit", edit_guru_path( guru ) )
         = link_to( "delete", guru_path( guru ), :method => :delete )
 
