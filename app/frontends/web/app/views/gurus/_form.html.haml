@@ -1,7 +1,21 @@
 
-= f.label :name, 'Name'
-= f.text_field :name, class: 'span5'
-= f.label :homepage, 'Official site'
-= f.text_field :homepage, class: 'span5'
-= f.label :description, 'Description'
-~ f.text_area :description, class: 'span5'
+.control-group{ class: ( vm.errors ? 'error' : '' ) }
+  %label.control-label{ for: 'guru_name' }
+    Name
+  .controls
+    %input.span5{ type: 'text', id: 'guru_name', name: 'guru[name]', value: vm.guru.name }
+    = errors(:name)
+
+.control-group
+  %label.control-label{ for: 'guru_homepage' }
+    Official site
+  .controls
+    %input.span5{ type: 'text', id: 'guru_homepage', name: 'guru[homepage]', value: vm.guru.homepage }
+    = errors(:homepage)
+
+.control-group
+  %label.control-label{ for: 'guru_description' }
+    Description
+  .controls
+    %textarea.span5{ id: 'guru_description', name: 'guru[description]', value: vm.guru.description }
+    = errors(:description)

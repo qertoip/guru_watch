@@ -12,6 +12,9 @@ module UseCases
       guru = Guru.create_valid!
       response = DestroyGuru.new(id: guru.id).exec
       assert(response.ok?)
+      assert_raises(RubyPersistenceAPI::ObjectNotFound) do
+        db[Guru].find(guru.id)
+      end
     end
 
   end

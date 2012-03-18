@@ -1,8 +1,13 @@
-- @title = 'Edit guru'
+= form_for( vm.guru, as: 'guru', url: guru_path( vm.guru ), :html => { class: 'form-horizontal' } ) do |f|
 
-= form_for( vm.guru, as: 'guru', url: guru_path( vm.guru ), :html => { class: 'well' } ) do |f|
+  %fieldset
+    %legend
+      = vm.guru.name
 
-  = render 'form', f: f
+    = render 'form', f: f
 
-  %p
-    = f.submit( 'Update', class: 'btn' )
+    .form-actions
+      %button{ class: 'btn btn-primary', type: 'submit' }
+        Save changes
+      %button{ class: 'btn', type: 'button', onclick: 'history.go(-1)' }
+        Cancel
