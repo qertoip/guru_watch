@@ -34,7 +34,7 @@ module RubyPersistenceAPI
       end
     end
 
-    class DogGateway < ConcreteGateway;
+    class DogGateway < ConcreteGateway
     end
 
     def setup

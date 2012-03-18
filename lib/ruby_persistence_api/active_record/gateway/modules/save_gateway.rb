@@ -8,15 +8,15 @@ module RubyPersistenceAPI
 
       def save_without_validation
         if entity.new_record?
-          model = entity_to_model(entity)
+          ar = entity_to_ar(entity)
         else
-          model = model_class.find(entity.id)
-          model.update_attributes(entity.attributes)
+          ar = ar_class.find(entity.id)
+          ar.update_attributes(entity.attributes)
         end
-        model.save(validate: false)
+        ar.save(validate: false)
 
         if entity.id.nil?
-          entity.id = model.id
+          entity.id = ar.id
         end
 
         nil

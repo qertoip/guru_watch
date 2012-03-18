@@ -11,13 +11,13 @@ module RubyPersistenceAPI
       class Entity;
         include ActiveAttr::Model
       end
-      class Dog < Entity;
+      class Dog < Entity
       end
-      class ConcreteBackend < Abstract::Backend;
+      class ConcreteBackend < Abstract::Backend
       end
-      class Gateway < Abstract::Gateway;
+      class Gateway < Abstract::Gateway
       end
-      class DogGateway < Gateway;
+      class DogGateway < Gateway
       end
 
       def setup

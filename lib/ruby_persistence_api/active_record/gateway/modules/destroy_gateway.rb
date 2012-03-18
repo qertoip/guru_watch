@@ -8,7 +8,7 @@ module RubyPersistenceAPI
 
       def destroy
         unless entity.new_record?
-          self.model_class.destroy(entity.id)
+          self.ar_class.destroy(entity.id)
         end
 
         entity.instance_variable_set('@destroyed', true)

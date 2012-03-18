@@ -20,10 +20,6 @@ module RubyPersistenceAPI
 
       protected
 
-      def entity_class
-        self.class.entity_klass
-      end
-
       def root
         backend.root
       end

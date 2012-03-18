@@ -20,20 +20,28 @@ module RubyPersistenceAPI
 
       protected
 
-      def entity_class
-        self.class.entity_klass
+      def ar_class
+        self.class.ar_klass
       end
 
-      def entity_to_model(entity)
-        model_class.new(entity.attributes)
+      class << self;
+        attr_accessor :ar_klass
       end
 
-      def model_to_entity(model)
-        entity_class.new(model.attributes)
+      def self.ar_class(ar_klass)
+        self.ar_klass = ar_klass
       end
 
-      def models_to_entities(models)
-        models.map { |model| model_to_entity(model) }
+      def entity_to_ar(entity)
+        ar_class.new(entity.attributes)
+      end
+
+      def ar_to_entity(ar)
+        entity_class.new(ar.attributes)
+      end
+
+      def ars_to_entities(ars)
+        ars.map { |ar| ar_to_entity(ar) }
       end
 
     end

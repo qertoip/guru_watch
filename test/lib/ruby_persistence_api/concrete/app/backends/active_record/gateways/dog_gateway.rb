@@ -7,13 +7,13 @@ module RubyPersistenceAPI
     module ActiveRecord
 
       class DogGateway < RubyPersistenceAPI::ActiveRecord::Gateway
-        entity_class Entities::Dog
+
         class Dog < ::ActiveRecord::Base;
         end
 
-        def model_class
-          Dog
-        end
+        entity_class Entities::Dog
+        ar_class Dog
+
       end
 
     end

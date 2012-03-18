@@ -15,6 +15,10 @@ module RubyPersistenceAPI
 
       protected
 
+      def entity_class
+        self.class.entity_klass
+      end
+
       class << self;
         attr_accessor :entity_klass
       end

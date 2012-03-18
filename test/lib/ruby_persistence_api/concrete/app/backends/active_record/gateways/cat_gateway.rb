@@ -7,13 +7,13 @@ module RubyPersistenceAPI
     module ActiveRecord
 
       class CatGateway < RubyPersistenceAPI::ActiveRecord::Gateway
-        entity_class Entities::Cat
-        class Cat < ::ActiveRecord::Base;
+
+        class Cat < ::ActiveRecord::Base
         end
 
-        def model_class
-          Cat
-        end
+        entity_class Entities::Cat
+        ar_class Cat
+
       end
 
     end

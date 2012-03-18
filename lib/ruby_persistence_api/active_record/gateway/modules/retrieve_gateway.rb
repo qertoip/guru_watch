@@ -9,22 +9,22 @@ module RubyPersistenceAPI
       def all(query = nil)
         query ||= Query.new(self)
         relation = query_to_relation(query)
-        models = relation.all
-        models_to_entities(models)
+        ars = relation.all
+        ars_to_entities(ars)
       end
 
       def first(query = nil)
         query ||= Query.new(self)
         relation = query_to_relation(query)
-        model = relation.first
-        model_to_entity(model) if model
+        ar = relation.first
+        ar_to_entity(ar) if ar
       end
 
       def find(id, query = nil)
         query ||= Query.new(self)
         relation = query_to_relation(query)
         begin
-          model_to_entity(relation.find(id))
+          ar_to_entity(relation.find(id))
         rescue ::ActiveRecord::RecordNotFound => e
           raise ObjectNotFound.new("#{entity_class.name}/#{id} not found")
         end
@@ -33,7 +33,7 @@ module RubyPersistenceAPI
       private
 
       def query_to_relation(query)
-        relation = model_class.scoped
+        relation = ar_class.scoped
         relation = add_where(relation, query)
         relation = add_where_not(relation, query)
         relation
