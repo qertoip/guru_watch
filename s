@@ -1,0 +1,1 @@
+bundle exec unicorn app/frontends/web/config.ru
