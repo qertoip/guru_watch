@@ -161,13 +161,19 @@ However:
 
 Web application is the only available frontend right now.
 
-    bundle exec unicorn app/frontends/web/config.ru
+    ./s
 
 At this early stage there is only one controller allowing you to manage your gurus.
 
 ## Running tests
 
-    bundle exec rake test
+To run all tests:
+
+    ./t
+
+Tu run specific tests see the list of available test tasks:
+
+    bundle exec rake -T
 
 ### Choosen architectural issues in the current implementation
 

@@ -70,6 +70,8 @@ GEM
       ruby_parser (>= 2.3.1)
     mime-types (1.17.2)
     minitest (2.11.3)
+    minitest-colorize (0.0.4)
+      minitest (~> 2.0)
     minitest-reporters (0.5.1)
       ansi
       minitest (~> 2.0)
@@ -150,6 +152,7 @@ DEPENDENCIES
   haml
   jquery-rails
   minitest
+  minitest-colorize
   minitest-reporters
   mocha
   pg
