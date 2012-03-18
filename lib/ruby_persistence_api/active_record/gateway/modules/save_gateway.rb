@@ -7,7 +7,12 @@ module RubyPersistenceAPI
     module SaveGateway
 
       def save_without_validation
-        model = entity_to_model(entity)
+        if entity.new_record?
+          model = entity_to_model(entity)
+        else
+          model = model_class.find(entity.id)
+          model.update_attributes(entity.attributes)
+        end
         model.save(validate: false)
 
         if entity.id.nil?
