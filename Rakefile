@@ -6,7 +6,6 @@ Rake::TestTask.new( 'test:lib' ) do |t|
   t.libs << ['app', 'lib', 'test_helpers']
   t.test_files = FileList['test/lib/**/*_test.rb']
   t.verbose = false
-  #t.description = "fdsfsdfdsfsd!!!!!!!!!!!!!!!!!!!"
 end
 
 Rake::TestTask.new( 'test:entities' ) do |t|
@@ -33,8 +32,10 @@ Rake::TestTask.new( 'test:backends' ) do |t|
   t.verbose = false
 end
 
+desc 'Run tests for test:entities + test:use_cases + test:frontends + test:backends'
 task 'test:app' => ['test:entities', 'test:use_cases', 'test:frontends', 'test:backends']
 
+desc 'Run tests for test:lib + test:app'
 task test: ['test:lib', 'test:app']
 
 task default: :test
