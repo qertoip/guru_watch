@@ -5,11 +5,16 @@ module UseCases
   class SeedDatabase < UseCase
 
     def exec
+      destroy_gurus
       create_gurus
       Response.new
     end
 
     private
+
+    def destroy_gurus
+      db[Guru].all.each do |guru| db[guru].destroy end
+    end
 
     def create_gurus
       SEED_GURUS.each do |seed_guru|
